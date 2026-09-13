@@ -6,7 +6,8 @@ Three.js and GSAP.
 [Live Portfolio](YOUR_VERCEL_LINK)
 
 ## Preview
-<hero screenshot>
+<img width="1366" height="603" alt="image" src="https://github.com/user-attachments/assets/fb90644f-12c7-403f-bbd1-b89e79b1dd9e" />
+
 
 ## Features
 - Cinematic red/black UI
