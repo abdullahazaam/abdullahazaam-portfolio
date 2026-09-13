@@ -1,0 +1,41 @@
+/* Card-only treatment: grid, content typography and section dimensions remain unchanged. */
+#skills .skill-shell { perspective: 900px; isolation: isolate; }
+#skills .skill-orbital-system { position: absolute; inset: 0; pointer-events: none; transform: translate3d(var(--rear-x,0px),var(--rear-y,0px),0); transition: transform .35s ease-out; }
+#skills .skill-rear-glass { position: absolute; inset: 6px 1px 1px; border: 1px solid #E509142b; border-radius: 13px; background: #080709; transform: translateY(3px) scale(.98); }
+#skills .skill-orbit-halo { position: absolute; inset: -7px; background: radial-gradient(ellipse,#E509141c,transparent 72%); opacity: .4; animation: skill-halo-breathe 8s ease-in-out var(--orbit-delay) infinite; }
+#skills .skill-orbit-track { position: absolute; inset: -3px; width: calc(100% + 6px); height: calc(100% + 6px); overflow: visible; }
+#skills .skill-orbit-track rect { fill: none; vector-effect: non-scaling-stroke; stroke-width: .7px; }
+#skills .skill-orbit-rail { stroke: #E509141c; }
+#skills .skill-orbit-primary { stroke: #E509146b; stroke-dasharray: 27 73; animation: skill-orbit-clockwise var(--orbit-duration) linear var(--orbit-delay) infinite; }
+#skills .skill-orbit-secondary { stroke: #E509143b; stroke-dasharray: 17 83; animation: skill-orbit-counter 47s linear var(--orbit-delay) infinite; }
+#skills .skill-orbit-track .skill-orbit-node { stroke: #E50914; stroke-width: 2.2px; stroke-linecap: round; stroke-dasharray: .18 99.82; animation: skill-orbit-clockwise var(--orbit-duration) linear var(--orbit-delay) infinite; }
+#skills .skill-orbit-track .skill-orbit-node-secondary { stroke-width: 1.5px; opacity: .45; animation: skill-orbit-counter 47s linear var(--orbit-delay) infinite; }
+#skills .skill-arc-plane { position: absolute; inset: -2px; border-radius: 25px; overflow: hidden; opacity: .28; }
+#skills .skill-geometric-arc { position: absolute; inset: -14%; border: .7px solid transparent; border-top-color: #E50914; border-right-color: #E5091440; border-radius: 50%; animation: skill-arc-turn 39s linear var(--orbit-delay) infinite; }
+#skills .skill-front { overflow: visible; transform: rotateX(var(--card-rx,0deg)) rotateY(var(--card-ry,0deg)); transform-style: preserve-3d; transition: transform .28s ease-out,box-shadow .35s,border-color .35s !important; background: linear-gradient(145deg,#170c12fa,#080709 54%,#100a0e) !important; border-radius: 11px !important; box-shadow: inset 0 1px #ffffff0d,0 7px 13px -8px #000,0 2px 0 #E5091414 !important; }
+#skills .skill-front::before { background: radial-gradient(130px circle at var(--light-x,50%) var(--light-y,0%),#E5091424,transparent 75%); opacity: .2; }
+#skills .skill-front::after { background: radial-gradient(85px circle at var(--light-x,50%) var(--light-y,0%),#E5091470,transparent 80%); opacity: .5; }
+#skills .skill-icon { transform: translateZ(0); transition: transform .35s ease-out; }
+#skills .skill-front { --light-x: inherit; --light-y: inherit; }
+#skills .skill-edge-window { position: absolute; inset: -1px; border-radius: inherit; padding: 1px; overflow: hidden; pointer-events: none; mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); mask-composite: exclude; }
+#skills .skill-edge-beam { position: absolute; inset: -75%; background: conic-gradient(from 0deg,transparent 0 315deg,#E5091460 348deg,transparent 360deg); animation: skill-arc-turn 22s linear var(--orbit-delay) infinite; }
+#skills .skill-engaged .skill-front { transform: rotateX(var(--card-rx,0deg)) rotateY(var(--card-ry,0deg)) translateY(-2px); border-color: #E5091470 !important; box-shadow: inset 0 1px #ffffff14,0 14px 25px -12px #000,0 0 15px #E509141a !important; }
+#skills .skill-engaged .skill-icon { transform: translateZ(20px) translateY(-2px) scale(1.045); }
+#skills .skill-engaged .skill-front::before,#skills .skill-engaged .skill-front::after { opacity: 1; }
+#skills .skill-engaged .skill-orbit-primary { stroke: #E50914a0; }
+#skills .skill-shell[data-orbit-paused] .skill-orbit-motion,#skills .skill-shell[data-orbit-paused] .skill-orbit-halo { animation-play-state: paused; }
+@keyframes skill-orbit-clockwise { to { stroke-dashoffset: -100; } }
+@keyframes skill-orbit-counter { to { stroke-dashoffset: 100; } }
+@keyframes skill-arc-turn { to { transform: rotate(360deg); } }
+@keyframes skill-halo-breathe { 50% { opacity: .75; transform: scale(1.035); } }
+@media (max-width:768px) {
+ #skills .skill-orbit-track { inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); }
+ #skills .skill-orbit-node-secondary,#skills .skill-arc-plane { display: none; }
+ #skills .skill-orbit-halo { inset: -3px; opacity: .2; animation: none; }
+ #skills .skill-orbit-track .skill-orbit-node { stroke-width: 1.7px; }
+ #skills .skill-front { backdrop-filter: none; }
+}
+@media (prefers-reduced-motion:reduce) {
+ #skills .skill-orbit-motion,#skills .skill-orbit-halo { animation: none !important; }
+ #skills .skill-shell,#skills .skill-front,#skills .skill-icon,#skills .skill-orbital-system { transform: none !important; transition: none !important; }
+}

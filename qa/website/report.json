@@ -1,0 +1,274 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "initial": {
+      "heroHeight": 750.234375,
+      "canvas": 0,
+      "pins": 0,
+      "overflow": 0,
+      "face": true
+    },
+    "sections": [
+      {
+        "id": "about",
+        "height": 521,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "skills",
+        "height": 413.1875,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "projects",
+        "height": 546.875,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "journey",
+        "height": 344.375,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "contact",
+        "height": 370,
+        "overflow": 0,
+        "heading": "1"
+      }
+    ],
+    "content": {
+      "projects": [
+        "NEXUS 2050",
+        "Hamara Commerce",
+        "PathSeeker",
+        "E-Greetings",
+        "Zero Hunger"
+      ],
+      "skills": 18,
+      "links": [
+        "https://nexus-2050.vercel.app",
+        "https://github.com/abdullahazaam/NEXUS-2050",
+        "http://hamara-commerce.runasp.net/",
+        "https://github.com/abdullahazaam/Hamara-Ecommerce",
+        "https://path-seeker-production.up.railway.app",
+        "https://github.com/abdullahazaam/Path-Seeker",
+        "http://e-greeting.runasp.net/",
+        "https://github.com/abdullahazaam/E-Greetings",
+        "https://github.com/abdullahazaam/Zero-Hunger",
+        "https://github.com/abdullahazaam/Zero-Hunger"
+      ],
+      "brokenImages": [],
+      "offscreenText": []
+    },
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "initial": {
+      "heroHeight": 640,
+      "canvas": 0,
+      "pins": 0,
+      "overflow": 0,
+      "face": true
+    },
+    "sections": [
+      {
+        "id": "about",
+        "height": 477.671875,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "skills",
+        "height": 530.1875,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "projects",
+        "height": 884,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "journey",
+        "height": 320.375,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "contact",
+        "height": 370,
+        "overflow": 0,
+        "heading": "1"
+      }
+    ],
+    "content": {
+      "projects": [
+        "NEXUS 2050",
+        "Hamara Commerce",
+        "PathSeeker",
+        "E-Greetings",
+        "Zero Hunger"
+      ],
+      "skills": 18,
+      "links": [
+        "https://nexus-2050.vercel.app",
+        "https://github.com/abdullahazaam/NEXUS-2050",
+        "http://hamara-commerce.runasp.net/",
+        "https://github.com/abdullahazaam/Hamara-Ecommerce",
+        "https://path-seeker-production.up.railway.app",
+        "https://github.com/abdullahazaam/Path-Seeker",
+        "http://e-greeting.runasp.net/",
+        "https://github.com/abdullahazaam/E-Greetings",
+        "https://github.com/abdullahazaam/Zero-Hunger",
+        "https://github.com/abdullahazaam/Zero-Hunger"
+      ],
+      "brokenImages": [],
+      "offscreenText": []
+    },
+    "errors": []
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "initial": {
+      "heroHeight": 600,
+      "canvas": 0,
+      "pins": 0,
+      "overflow": 0,
+      "face": true
+    },
+    "sections": [
+      {
+        "id": "about",
+        "height": 465.125,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "skills",
+        "height": 531.0625,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "projects",
+        "height": 1320.71875,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "journey",
+        "height": 344.375,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "contact",
+        "height": 420.78125,
+        "overflow": 0,
+        "heading": "1"
+      }
+    ],
+    "content": {
+      "projects": [
+        "NEXUS 2050",
+        "Hamara Commerce",
+        "PathSeeker",
+        "E-Greetings",
+        "Zero Hunger"
+      ],
+      "skills": 18,
+      "links": [
+        "https://nexus-2050.vercel.app",
+        "https://github.com/abdullahazaam/NEXUS-2050",
+        "http://hamara-commerce.runasp.net/",
+        "https://github.com/abdullahazaam/Hamara-Ecommerce",
+        "https://path-seeker-production.up.railway.app",
+        "https://github.com/abdullahazaam/Path-Seeker",
+        "http://e-greeting.runasp.net/",
+        "https://github.com/abdullahazaam/E-Greetings",
+        "https://github.com/abdullahazaam/Zero-Hunger",
+        "https://github.com/abdullahazaam/Zero-Hunger"
+      ],
+      "brokenImages": [],
+      "offscreenText": []
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "initial": {
+      "heroHeight": 800,
+      "canvas": 0,
+      "pins": 0,
+      "overflow": 0,
+      "face": true
+    },
+    "sections": [
+      {
+        "id": "about",
+        "height": 781.5625,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "skills",
+        "height": 904.265625,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "projects",
+        "height": 2189.703125,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "journey",
+        "height": 801.78125,
+        "overflow": 0,
+        "heading": "1"
+      },
+      {
+        "id": "contact",
+        "height": 880.28125,
+        "overflow": 0,
+        "heading": "1"
+      }
+    ],
+    "content": {
+      "projects": [
+        "NEXUS 2050",
+        "Hamara Commerce",
+        "PathSeeker",
+        "E-Greetings",
+        "Zero Hunger"
+      ],
+      "skills": 18,
+      "links": [
+        "https://nexus-2050.vercel.app",
+        "https://github.com/abdullahazaam/NEXUS-2050",
+        "http://hamara-commerce.runasp.net/",
+        "https://github.com/abdullahazaam/Hamara-Ecommerce",
+        "https://path-seeker-production.up.railway.app",
+        "https://github.com/abdullahazaam/Path-Seeker",
+        "http://e-greeting.runasp.net/",
+        "https://github.com/abdullahazaam/E-Greetings",
+        "https://github.com/abdullahazaam/Zero-Hunger",
+        "https://github.com/abdullahazaam/Zero-Hunger"
+      ],
+      "brokenImages": [],
+      "offscreenText": []
+    },
+    "errors": []
+  }
+]

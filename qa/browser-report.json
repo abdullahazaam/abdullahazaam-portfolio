@@ -1,0 +1,750 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "initial": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 2115,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 2115
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 900,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 900
+      },
+      "copy": {
+        "top": 185.390625,
+        "bottom": 704.609375,
+        "left": 120,
+        "right": 670,
+        "width": 550,
+        "height": 519.21875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "idle": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 2115,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 2115
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 900,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 900
+      },
+      "copy": {
+        "top": 185.390625,
+        "bottom": 704.609375,
+        "left": 120,
+        "right": 670,
+        "width": 550,
+        "height": 519.21875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "middle": {
+      "scrollY": 790,
+      "progress": 0.650206,
+      "hero": {
+        "top": -790,
+        "bottom": 1325,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 2115
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 900,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 900
+      },
+      "copy": {
+        "top": 185.390625,
+        "bottom": 704.609375,
+        "left": 120,
+        "right": 670,
+        "width": 550,
+        "height": 519.21875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "front": {
+      "scrollY": 1215,
+      "progress": 1,
+      "hero": {
+        "top": -1215,
+        "bottom": 900,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 2115
+      },
+      "viewport": {
+        "top": 0.0009765625,
+        "bottom": 900.0009765625,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 900
+      },
+      "copy": {
+        "top": 185.3916015625,
+        "bottom": 704.6103515625,
+        "left": 120,
+        "right": 670,
+        "width": 550,
+        "height": 519.21875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "reverse": {
+      "scrollY": 608,
+      "progress": 0.500412,
+      "hero": {
+        "top": -608,
+        "bottom": 1507,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 2115
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 900,
+        "left": 0,
+        "right": 1440,
+        "width": 1440,
+        "height": 900
+      },
+      "copy": {
+        "top": 185.390625,
+        "bottom": 704.609375,
+        "left": 120,
+        "right": 670,
+        "width": 550,
+        "height": 519.21875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "sections": [
+      {
+        "id": "about",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "skills",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "projects",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "journey",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "contact",
+        "overflow": 0,
+        "headingVisible": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "initial": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 1804.796875,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 1804.796875
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 768,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 768
+      },
+      "copy": {
+        "top": 150.5,
+        "bottom": 607.5,
+        "left": 32,
+        "right": 502.390625,
+        "width": 470.390625,
+        "height": 457
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "idle": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 1804.796875,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 1804.796875
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 768,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 768
+      },
+      "copy": {
+        "top": 150.5,
+        "bottom": 607.5,
+        "left": 32,
+        "right": 502.390625,
+        "width": 470.390625,
+        "height": 457
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "middle": {
+      "scrollY": 674,
+      "progress": 0.649952,
+      "hero": {
+        "top": -674,
+        "bottom": 1130.796875,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 1804.796875
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 768,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 768
+      },
+      "copy": {
+        "top": 150.5,
+        "bottom": 607.5,
+        "left": 32,
+        "right": 502.390625,
+        "width": 470.390625,
+        "height": 457
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "front": {
+      "scrollY": 1037,
+      "progress": 1,
+      "hero": {
+        "top": -1037,
+        "bottom": 767.796875,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 1804.796875
+      },
+      "viewport": {
+        "top": 0.0009765625,
+        "bottom": 768.0009765625,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 768
+      },
+      "copy": {
+        "top": 150.5009765625,
+        "bottom": 607.5009765625,
+        "left": 32,
+        "right": 502.390625,
+        "width": 470.390625,
+        "height": 457
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "reverse": {
+      "scrollY": 519,
+      "progress": 0.500483,
+      "hero": {
+        "top": -519,
+        "bottom": 1285.796875,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 1804.796875
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 768,
+        "left": 0,
+        "right": 1024,
+        "width": 1024,
+        "height": 768
+      },
+      "copy": {
+        "top": 150.5,
+        "bottom": 607.5,
+        "left": 32,
+        "right": 502.390625,
+        "width": 470.390625,
+        "height": 457
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "sections": [
+      {
+        "id": "about",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "skills",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "projects",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "journey",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "contact",
+        "overflow": 0,
+        "headingVisible": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "initial": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 2406.390625,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 2406.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 1024,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 1024
+      },
+      "copy": {
+        "top": 297.03125,
+        "bottom": 716.96875,
+        "left": 32,
+        "right": 376.953125,
+        "width": 344.953125,
+        "height": 419.9375
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "idle": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 2406.390625,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 2406.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 1024,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 1024
+      },
+      "copy": {
+        "top": 297.03125,
+        "bottom": 716.96875,
+        "left": 32,
+        "right": 376.953125,
+        "width": 344.953125,
+        "height": 419.9375
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "middle": {
+      "scrollY": 899,
+      "progress": 0.650507,
+      "hero": {
+        "top": -899,
+        "bottom": 1507.390625,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 2406.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 1024,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 1024
+      },
+      "copy": {
+        "top": 297.03125,
+        "bottom": 716.96875,
+        "left": 32,
+        "right": 376.953125,
+        "width": 344.953125,
+        "height": 419.9375
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "front": {
+      "scrollY": 1382,
+      "progress": 1,
+      "hero": {
+        "top": -1382,
+        "bottom": 1024.390625,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 2406.390625
+      },
+      "viewport": {
+        "top": 0.0009765625,
+        "bottom": 1024.0009765625,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 1024
+      },
+      "copy": {
+        "top": 297.0322265625,
+        "bottom": 716.9697265625,
+        "left": 32,
+        "right": 376.953125,
+        "width": 344.953125,
+        "height": 419.9375
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "reverse": {
+      "scrollY": 691,
+      "progress": 0.5,
+      "hero": {
+        "top": -691,
+        "bottom": 1715.390625,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 2406.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 1024,
+        "left": 0,
+        "right": 768,
+        "width": 768,
+        "height": 1024
+      },
+      "copy": {
+        "top": 297.03125,
+        "bottom": 716.96875,
+        "left": 32,
+        "right": 376.953125,
+        "width": 344.953125,
+        "height": 419.9375
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "sections": [
+      {
+        "id": "about",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "skills",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "projects",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "journey",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "contact",
+        "overflow": 0,
+        "headingVisible": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "initial": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 1772.390625,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 1772.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 844,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 844
+      },
+      "copy": {
+        "top": 440.28125,
+        "bottom": 771,
+        "left": 24,
+        "right": 366,
+        "width": 342,
+        "height": 330.71875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "idle": {
+      "scrollY": 0,
+      "progress": 0.000001,
+      "hero": {
+        "top": 0,
+        "bottom": 1772.390625,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 1772.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 844,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 844
+      },
+      "copy": {
+        "top": 440.28125,
+        "bottom": 771,
+        "left": 24,
+        "right": 366,
+        "width": 342,
+        "height": 330.71875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "middle": {
+      "scrollY": 603,
+      "progress": 0.649785,
+      "hero": {
+        "top": -603,
+        "bottom": 1169.390625,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 1772.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 844,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 844
+      },
+      "copy": {
+        "top": 440.28125,
+        "bottom": 771,
+        "left": 24,
+        "right": 366,
+        "width": 342,
+        "height": 330.71875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "front": {
+      "scrollY": 928,
+      "progress": 1,
+      "hero": {
+        "top": -928,
+        "bottom": 844.390625,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 1772.390625
+      },
+      "viewport": {
+        "top": 0.0009765625,
+        "bottom": 844.0009765625,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 844
+      },
+      "copy": {
+        "top": 440.2822265625,
+        "bottom": 771.0009765625,
+        "left": 24,
+        "right": 366,
+        "width": 342,
+        "height": 330.71875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "reverse": {
+      "scrollY": 464,
+      "progress": 0.500001,
+      "hero": {
+        "top": -464,
+        "bottom": 1308.390625,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 1772.390625
+      },
+      "viewport": {
+        "top": 0,
+        "bottom": 844,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 844
+      },
+      "copy": {
+        "top": 440.28125,
+        "bottom": 771,
+        "left": 24,
+        "right": 366,
+        "width": 342,
+        "height": 330.71875
+      },
+      "gap": 0,
+      "overflow": 0,
+      "canvases": 1
+    },
+    "sections": [
+      {
+        "id": "about",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "skills",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "projects",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "journey",
+        "overflow": 0,
+        "headingVisible": true
+      },
+      {
+        "id": "contact",
+        "overflow": 0,
+        "headingVisible": true
+      }
+    ],
+    "errors": []
+  }
+]
