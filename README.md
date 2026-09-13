@@ -11,7 +11,7 @@ A modern, high-performance developer portfolio showcasing full-stack web applica
 ## Preview
 
 <p align="center">
-  <img src="public/website.png" alt="Abdullah Azaam Portfolio Preview" width="100%" />
+<img width="1366" height="3419" alt="image" src="https://github.com/user-attachments/assets/a7362f50-efb9-41f2-826f-d26eaa8e97fc" />
 </p>
 
 ---
