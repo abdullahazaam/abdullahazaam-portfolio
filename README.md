@@ -3,7 +3,7 @@
 Modern cinematic developer portfolio built with React, TypeScript,
 Three.js and GSAP.
 
-[Live Portfolio](YOUR_VERCEL_LINK)
+[Live Portfolio](https://abdullahazaam-portfolio.vercel.app/)
 
 ## Preview
 <img width="1366" height="603" alt="image" src="https://github.com/user-attachments/assets/fb90644f-12c7-403f-bbd1-b89e79b1dd9e" />
