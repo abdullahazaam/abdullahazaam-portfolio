@@ -23,20 +23,21 @@ export const Navbar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
-      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 8) {
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 25) {
         setActiveSection('contact');
         return;
       }
+      if (window.scrollY < 120) {
+        setActiveSection('hero');
+        return;
+      }
 
-      const sections = ['hero', 'about', 'skills', 'projects', 'journey', 'contact'];
-      const scrollPos = window.scrollY + 200;
-
+      const sections = ['about', 'skills', 'projects', 'journey', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160 && rect.bottom > 160) {
             setActiveSection(sectionId);
             break;
           }
@@ -48,17 +49,35 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Keyboard escape key listener for mobile drawer
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const id = href.replace('#', '');
+    setActiveSection(id);
+    if (id === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setMobileMenuOpen(false);
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -75;
+      const yOffset = -72;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
     setMobileMenuOpen(false);
   };
+
 
   return (
     <header
@@ -137,6 +156,8 @@ export const Navbar: React.FC = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-[#0C0C0C] border border-red-950/60 text-neutral-300 hover:text-white hover:border-[#E50914] focus:outline-none transition-all"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -145,12 +166,15 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       <div
+        id="mobile-navigation-menu"
+        aria-hidden={!mobileMenuOpen}
         className={`lg:hidden fixed inset-x-0 top-[62px] p-4 transition-all duration-300 ease-in-out ${
           mobileMenuOpen
-            ? 'opacity-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 -translate-y-4 pointer-events-none'
+            ? 'opacity-100 translate-y-0 pointer-events-auto visible'
+            : 'opacity-0 -translate-y-4 pointer-events-none invisible'
         }`}
       >
+
         <div className="rounded-2xl bg-[#080808]/95 backdrop-blur-xl border border-red-900/30 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col gap-2">
           {navItems.map((item) => {
             const isActive = activeSection === item.href.replace('#', '');

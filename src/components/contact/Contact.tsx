@@ -15,15 +15,22 @@ export const Contact: React.FC = () => {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    const form = e.currentTarget;
+    const formValues = new FormData(form);
+    const name = String(formValues.get('name') || formData.name).trim();
+    const email = String(formValues.get('email') || formData.email).trim();
+    const message = String(formValues.get('message') || formData.message).trim();
+    if (!name || !email || !message) return;
     setFormSubmitted(true);
     setTimeout(() => {
       setFormSubmitted(false);
       setFormData({ name: '', email: '', message: '' });
+      form.reset();
     }, 4000);
   };
+
 
   return (
     <section id="contact" className="contact-upgraded relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20">
@@ -162,29 +169,40 @@ export const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
+                    <label htmlFor="contact-name" className="sr-only">Your Name</label>
                     <input
+                      id="contact-name"
+                      name="name"
                       type="text"
                       required
                       placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      autoComplete="name"
                       className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors"
                     />
                   </div>
 
                   <div>
+                    <label htmlFor="contact-email" className="sr-only">Your Email</label>
                     <input
+                      id="contact-email"
+                      name="email"
                       type="email"
                       required
                       placeholder="Your Email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      autoComplete="email"
                       className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors"
                     />
                   </div>
 
                   <div>
+                    <label htmlFor="contact-message" className="sr-only">Your Message</label>
                     <textarea
+                      id="contact-message"
+                      name="message"
                       required
                       rows={4}
                       placeholder="Your Message"
@@ -193,6 +211,7 @@ export const Contact: React.FC = () => {
                       className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors resize-none"
                     />
                   </div>
+
 
                   <button
                     type="submit"

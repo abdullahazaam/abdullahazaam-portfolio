@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { DotNetIcon, CSharpIcon, DatabaseIcon, LaravelIcon, ReactIcon, ThreeJsIcon } from '../common/Icons';
 
 export const DeveloperCoreVisual: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   const [tilt, setTilt] = useState({ px: 0, py: 0 });
   const isHoveredRef = useRef(false);
   const nodeElementsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -22,7 +23,7 @@ export const DeveloperCoreVisual: React.FC = () => {
   ];
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || e.pointerType === 'touch') return;
     const rect = containerRef.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
@@ -42,17 +43,32 @@ export const DeveloperCoreVisual: React.FC = () => {
   useEffect(() => {
     let lastTime = performance.now();
     let rafId = 0;
+    let isVisible = true;
 
-    const normalSpeed = (2 * Math.PI) / 22; // ~22 seconds per complete orbit
-    const hoverSpeed = (2 * Math.PI) / 46;  // Smoothly decelerates on hover without abrupt stop
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0.05 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    const normalSpeed = shouldReduceMotion ? 0 : (2 * Math.PI) / 22; // ~22 seconds per complete orbit
+    const hoverSpeed = shouldReduceMotion ? 0 : (2 * Math.PI) / 46;  // Smoothly decelerates on hover without abrupt stop
 
     const animate = (time: number) => {
+      if (!isVisible) {
+        rafId = requestAnimationFrame(animate);
+        return;
+      }
+
       const dt = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
 
       // Smooth transition between normal and hover speed
       const targetSpeed = isHoveredRef.current ? hoverSpeed : normalSpeed;
       speedRef.current += (targetSpeed - speedRef.current) * 0.05;
+
 
       // Advance angle clockwise (positive increment)
       angleRef.current = (angleRef.current + speedRef.current * dt) % (2 * Math.PI);
@@ -117,8 +133,12 @@ export const DeveloperCoreVisual: React.FC = () => {
     };
 
     rafId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
+    return () => {
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
+  }, [shouldReduceMotion]);
+
 
   return (
     <div
@@ -220,7 +240,8 @@ export const DeveloperCoreVisual: React.FC = () => {
             'drop-shadow(0 0 12px rgba(255,26,54,0.7)) drop-shadow(0 0 26px rgba(255,16,44,0.4))',
           ],
         }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+        transition={shouldReduceMotion ? { duration: 0 } : { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+
         style={{ transform: 'translate3d(-50%, -50%, 30px)', zIndex: 15 }}
       >
         AA

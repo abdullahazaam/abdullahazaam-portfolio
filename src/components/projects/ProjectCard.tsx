@@ -18,7 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
   const primaryUrl = project.liveUrl || project.githubUrl;
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (e.pointerType === 'touch' || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -27,11 +27,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
     setCoords({ x, y, px, py });
   };
 
-  const handlePointerEnter = () => setIsHovered(true);
+  const handlePointerEnter = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch') return;
+    setIsHovered(true);
+  };
   const handlePointerLeave = () => {
     setIsHovered(false);
     setCoords({ x: 0, y: 0, px: 0, py: 0 });
   };
+
 
   // Whole card click handler (respects child button/link clicks)
   const handleCardClick = (e: React.MouseEvent) => {
@@ -247,6 +251,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
+              aria-label={`View ${project.title} live demonstration`}
               className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#E50914] text-white font-sans font-semibold text-[11px] uppercase tracking-wider shadow-[0_0_16px_rgba(229,9,20,0.4)] hover:shadow-[0_0_26px_rgba(229,9,20,0.75)] hover:bg-[#ff1e2b] transition-all active:scale-[0.98] group/btn"
             >
               <span>Live Demo</span>
@@ -258,6 +263,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
+              aria-label={`View ${project.title} repository on GitHub`}
               className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#E50914] text-white font-sans font-semibold text-[11px] uppercase tracking-wider shadow-[0_0_16px_rgba(229,9,20,0.4)] hover:shadow-[0_0_26px_rgba(229,9,20,0.75)] hover:bg-[#ff1e2b] transition-all active:scale-[0.98] group/btn"
             >
               <span>View Repo</span>
@@ -270,12 +276,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            aria-label="View source code on GitHub"
+            aria-label={`View ${project.title} source code on GitHub`}
             className="inline-flex items-center justify-center p-2 rounded-lg bg-[#111113] text-neutral-300 border border-neutral-800/90 hover:border-red-600/70 hover:text-white hover:bg-[#18181c] hover:shadow-[0_0_14px_rgba(229,9,20,0.35)] transition-all"
           >
             <GithubIcon size={15} className="text-[#E50914]" />
           </a>
         </div>
+
       </motion.div>
     </div>
   );
