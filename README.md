@@ -107,4 +107,4 @@ npm run preview
 - **GitHub**: [@abdullahazaam](https://github.com/abdullahazaam)
 - **Repository**: [abdullahazaam/abdullahazaam-portfolio](https://github.com/abdullahazaam/abdullahazaam-portfolio)
 - **LinkedIn**: [linkedin.com/in/abdullah-azaam-76975440a](https://linkedin.com/in/abdullah-azaam-76975440a)
-- **Email**: [abdullahazaam.dev@gmail.com](mailto:abdullahazaam.dev@gmail.com) / [abdullahazaam1505@gmail.com](mailto:abdullahazaam1505@gmail.com)
+- **Email**: [abdullahazaam1505@gmail.com](mailto:abdullahazaam1505@gmail.com)
