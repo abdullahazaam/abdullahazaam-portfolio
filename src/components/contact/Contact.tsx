@@ -109,7 +109,7 @@ export const Contact: React.FC = () => {
                   <div>
                     <span className="font-sans text-[11px] text-neutral-400 block font-medium">LinkedIn</span>
                     <span className="font-sans text-xs sm:text-sm font-semibold text-white group-hover:text-[#E50914] transition-colors truncate max-w-[200px] sm:max-w-none block">
-                      abdullah-azaam-76975440a
+                      abdullahazaam-dev
                     </span>
                   </div>
                 </div>
