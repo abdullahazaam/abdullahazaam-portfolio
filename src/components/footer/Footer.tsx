@@ -94,7 +94,7 @@ export const Footer: React.FC = () => {
             </a>
 
             <a
-              href="mailto:abdullahazaam.dev@gmail.com"
+              href="mailto:abdullahazaam1505@gmail.com"
               className="w-9 h-9 rounded-xl bg-[#0C0C0C] border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-white hover:border-[#E50914] transition-colors"
               aria-label="Email"
             >
