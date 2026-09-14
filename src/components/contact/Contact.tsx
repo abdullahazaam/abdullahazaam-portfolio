@@ -1,11 +1,13 @@
 import { SectionDepth } from './SectionDepth';
 import React, { useState } from 'react';
-import { Mail, Copy, Check, Send, Sparkles, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Mail, Copy, Check, Send, Sparkles, MessageSquare, ArrowUpRight, Loader2, AlertCircle } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/Icons';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const emailAddress = 'abdullahazaam1505@gmail.com';
 
@@ -15,20 +17,63 @@ export const Contact: React.FC = () => {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     const form = e.currentTarget;
     const formValues = new FormData(form);
     const name = String(formValues.get('name') || formData.name).trim();
     const email = String(formValues.get('email') || formData.email).trim();
     const message = String(formValues.get('message') || formData.message).trim();
-    if (!name || !email || !message) return;
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
+
+    // Validate inputs
+    if (!name) {
+      setErrorMessage('Please enter your name.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setErrorMessage('Please enter a valid email address.');
+      return;
+    }
+
+    if (!message || message.length < 5) {
+      setErrorMessage('Please enter a message with at least 5 characters.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message. Please try again or reach out directly by email.');
+      }
+
+      setFormSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
       form.reset();
-    }, 4000);
+
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Something went wrong. Please try again or reach out directly by email.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -177,9 +222,13 @@ export const Contact: React.FC = () => {
                       required
                       placeholder="Your Name"
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        if (errorMessage) setErrorMessage(null);
+                      }}
                       autoComplete="name"
-                      className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors disabled:opacity-60"
                     />
                   </div>
 
@@ -192,9 +241,13 @@ export const Contact: React.FC = () => {
                       required
                       placeholder="Your Email"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                        if (errorMessage) setErrorMessage(null);
+                      }}
                       autoComplete="email"
-                      className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors disabled:opacity-60"
                     />
                   </div>
 
@@ -207,18 +260,38 @@ export const Contact: React.FC = () => {
                       rows={4}
                       placeholder="Your Message"
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors resize-none"
+                      onChange={(e) => {
+                        setFormData({ ...formData, message: e.target.value });
+                        if (errorMessage) setErrorMessage(null);
+                      }}
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-xl bg-[#111111] border border-neutral-800 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] transition-colors resize-none disabled:opacity-60"
                     />
                   </div>
 
+                  {errorMessage && (
+                    <div className="p-3 rounded-xl bg-red-950/30 border border-red-900/50 text-red-200 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 text-[#E50914] flex-shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
 
                   <button
                     type="submit"
-                    className="group w-full py-3.5 rounded-xl bg-[#E50914] text-white font-sans font-semibold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(229,9,20,0.35)] hover:shadow-[0_0_30px_rgba(229,9,20,0.65)] hover:bg-[#ff1e2b] transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+                    disabled={isSubmitting}
+                    className="group w-full py-3.5 rounded-xl bg-[#E50914] text-white font-sans font-semibold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(229,9,20,0.35)] hover:shadow-[0_0_30px_rgba(229,9,20,0.65)] hover:bg-[#ff1e2b] transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
                   >
-                    <span>Send Message</span>
-                    <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
