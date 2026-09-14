@@ -92,3 +92,15 @@
  #hero .hero-approved-plane { --photo-width: 175%; left: -72%; }
  #hero .hero-wall-extension { opacity: .32; filter: blur(14px); }
 }
+
+/* Mobile spacing only: keep the approved image scale and all larger layouts. */
+@media (max-width:480px) {
+ #hero.blueprint-hero { height:auto !important; min-height:0 !important; max-height:none !important; }
+ #hero .hero-workstation { position:relative; inset:auto; height:calc(70.56vw - 24px); }
+ #hero .hero-approved-plane { top:-34px; transform:none; }
+ #hero .hero-room-copy { position:relative; top:auto; bottom:auto; margin-bottom:24px; }
+ #hero .hero-room-copy .hero-room-eyebrow { margin-bottom:10px; }
+ #hero .hero-room-description { margin-top:12px; }
+ #hero .hero-room-actions { margin-top:16px; }
+ #hero .hero-room-stats { margin-top:18px; }
+}
