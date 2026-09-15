@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Compass } from 'lucide-react';
 import { JourneyRoute } from './JourneyRoute';
 import { SectionDepth } from '../contact/SectionDepth';
@@ -19,31 +19,9 @@ const steps: TimelineStep[] = [
 ];
 
 export const Journey: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let inView = false;
-    const update = () => {
-      el.toggleAttribute('data-section-paused', !inView || document.hidden);
-    };
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      update();
-    }, { rootMargin: '300px 0px', threshold: 0.01 });
-    observer.observe(el);
-    document.addEventListener('visibilitychange', update);
-    return () => {
-      observer.disconnect();
-      document.removeEventListener('visibilitychange', update);
-      el.removeAttribute('data-section-paused');
-    };
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
+      
       id="journey"
       className="journey-upgraded relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20"
     >

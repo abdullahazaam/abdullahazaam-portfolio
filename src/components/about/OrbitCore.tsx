@@ -37,51 +37,23 @@ export const DeveloperCoreVisual: React.FC = () => {
         el.style.zIndex=Math.sin(a)>0?'12':'4';
       });
     };
-    let loading = false;
-    const loadEarth = () => {
-      if (loading || globe || disposed) return;
-      loading = true;
-      import('./HolographicEarth').then(({createEarth})=>{
-        if(disposed)return;
-        try {globe=createEarth(canvas);globe.resize(size,!desktop.matches);paint(0);sync();}
-        catch {root.dataset.fallback='true';}
-      }).catch(()=>{if(!disposed)root.dataset.fallback='true';});
-    };
-
     const tick=(now:number)=>{frame=0;const dt=last?Math.min((now-last)/1000,.05):0;last=now;elapsed+=dt;paint(dt);if(visible&&!document.hidden&&!reduced.matches)frame=requestAnimationFrame(tick);};
     const sync=()=>{cancelAnimationFrame(frame);frame=0;last=0;root.dataset.paused=String(!visible||document.hidden||reduced.matches);if(reduced.matches){targetX=targetY=x=y=0;paint(0);}else if(visible&&!document.hidden)frame=requestAnimationFrame(tick);};
     const resize=new ResizeObserver(()=>{size=root.clientWidth;globe?.resize(size,!desktop.matches);paint(0);});resize.observe(root);
-    const observer=new IntersectionObserver(([entry])=>{
-      visible=entry.isIntersecting;
-      if (visible) loadEarth();
-      sync();
-    },{rootMargin:'400px 0px',threshold:.01});
-    observer.observe(root);
+    const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();},{threshold:.01});observer.observe(root);
     const move=(e:PointerEvent)=>{if(!desktop.matches||reduced.matches||e.pointerType==='touch')return;const r=root.getBoundingClientRect();targetX=Math.max(-1,Math.min(1,(e.clientX-r.left)/r.width*2-1))*.06;targetY=Math.max(-1,Math.min(1,(e.clientY-r.top)/r.height*2-1))*.06;};
     const leave=()=>{targetX=targetY=0;};
     const mediaChange=()=>{leave();sync();};
     root.addEventListener('pointermove',move,{passive:true});root.addEventListener('pointerleave',leave);
     document.addEventListener('visibilitychange',sync);reduced.addEventListener('change',mediaChange);desktop.addEventListener('change',mediaChange);
     paint(0);
-
-    let idleId: number | undefined;
-    if (typeof window.requestIdleCallback === 'function') {
-      idleId = window.requestIdleCallback(loadEarth, { timeout: 3500 });
-    }
-
-    return()=>{
-      disposed=true;
-      if (idleId && typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(idleId);
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      resize.disconnect();
-      root.removeEventListener('pointermove',move);
-      root.removeEventListener('pointerleave',leave);
-      document.removeEventListener('visibilitychange',sync);
-      reduced.removeEventListener('change',mediaChange);
-      desktop.removeEventListener('change',mediaChange);
-      globe?.dispose();
-    };
+    // Keep Three.js outside the critical page bundle. StrictMode/unmount cannot leak a renderer.
+    import('./HolographicEarth').then(({createEarth})=>{
+      if(disposed)return;
+      try {globe=createEarth(canvas);globe.resize(size,!desktop.matches);paint(0);sync();}
+      catch {root.dataset.fallback='true';}
+    }).catch(()=>{if(!disposed)root.dataset.fallback='true';});
+    return()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();resize.disconnect();root.removeEventListener('pointermove',move);root.removeEventListener('pointerleave',leave);document.removeEventListener('visibilitychange',sync);reduced.removeEventListener('change',mediaChange);desktop.removeEventListener('change',mediaChange);globe?.dispose();};
   },[]);
   return <div ref={containerRef} className="tech-core developer-globe relative select-none">
     <div className="earth-atmosphere" aria-hidden="true" />

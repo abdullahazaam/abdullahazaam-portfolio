@@ -64,29 +64,16 @@ export const Skills: React.FC = () => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       let revealed = false;
-      let inView = false;
-      const updatePause = () => {
-        const paused = !inView || document.hidden;
-        cards.forEach(card => card.toggleAttribute('data-orbit-paused', paused));
-      };
       gsap.set(cards, { opacity: 0, y: 17, z: -20, rotateX: 7 });
       const observer = new IntersectionObserver(([entry]) => {
-        inView = entry.isIntersecting;
-        updatePause();
+        cards.forEach(card => card.toggleAttribute('data-orbit-paused', !entry.isIntersecting));
         if (!entry.isIntersecting || revealed) return;
         revealed = true;
         const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
         gsap.to(cards, { opacity: 1, y: 0, z: 0, rotateX: 0, duration: .65, ease: 'power3.out', stagger: index => Math.floor(index / columns) * .18 + (index % columns) * .04, clearProps: 'transform,opacity' });
       }, { rootMargin: '0px 0px -6% 0px', threshold: .05 });
       observer.observe(grid);
-      document.addEventListener('visibilitychange', updatePause);
-      return () => {
-        document.removeEventListener('visibilitychange', updatePause);
-        observer.disconnect();
-        gsap.killTweensOf(cards);
-        gsap.set(cards, { clearProps: 'transform,opacity' });
-        cards.forEach(card => card.removeAttribute('data-orbit-paused'));
-      };
+      return () => { observer.disconnect(); gsap.killTweensOf(cards); gsap.set(cards, { clearProps: 'transform,opacity' }); cards.forEach(card => card.removeAttribute('data-orbit-paused')); };
     });
     return () => media.revert();
   }, []);

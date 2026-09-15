@@ -1,0 +1,142 @@
+[
+  {
+    "width": 1440,
+    "initial": {
+      "progress": 0.000001,
+      "top": 0,
+      "gap": 0,
+      "range": 1215,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "turn": {
+      "progress": 0.700412,
+      "top": 0,
+      "gap": 0,
+      "range": 1215,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "reverse": {
+      "progress": 0.349795,
+      "top": 0,
+      "gap": 0,
+      "range": 1215,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "errors": [],
+    "result": "PASS"
+  },
+  {
+    "width": 1024,
+    "initial": {
+      "progress": 0.000001,
+      "top": 0,
+      "gap": 0,
+      "range": 1037,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "turn": {
+      "progress": 0.700097,
+      "top": 0,
+      "gap": 0,
+      "range": 1037,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "reverse": {
+      "progress": 0.350049,
+      "top": 0,
+      "gap": 0,
+      "range": 1037,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "errors": [],
+    "result": "PASS"
+  },
+  {
+    "width": 768,
+    "initial": {
+      "progress": 0.000001,
+      "top": 0,
+      "gap": 0,
+      "range": 1126,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "turn": {
+      "progress": 0.699823,
+      "top": 0,
+      "gap": 0,
+      "range": 1126,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "reverse": {
+      "progress": 0.349912,
+      "top": 0,
+      "gap": 0,
+      "range": 1126,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "errors": [],
+    "result": "PASS"
+  },
+  {
+    "width": 390,
+    "initial": {
+      "progress": 0.000001,
+      "top": 0,
+      "gap": 0,
+      "range": 928,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "turn": {
+      "progress": 0.700431,
+      "top": 0,
+      "gap": 0,
+      "range": 928,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "reverse": {
+      "progress": 0.350216,
+      "top": 0,
+      "gap": 0,
+      "range": 928,
+      "overflow": 0,
+      "canvas": 1,
+      "textVisible": true
+    },
+    "errors": [],
+    "result": "PASS"
+  },
+  {
+    "reducedMotion": {
+      "height": 844,
+      "viewport": 844,
+      "pins": 0,
+      "motion": false
+    },
+    "result": "PASS"
+  },
+  {
+    "webglFallback": "PASS"
+  }
+]

@@ -21,23 +21,18 @@ export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    let ticking = false;
-    const sections = ['about', 'skills', 'projects', 'journey', 'contact'];
-
-    const updateScroll = () => {
-      ticking = false;
-      const scrollY = window.scrollY;
-      setScrolled(scrollY > 30);
-
-      if (scrollY + window.innerHeight >= document.documentElement.scrollHeight - 25) {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 25) {
         setActiveSection('contact');
         return;
       }
-      if (scrollY < 120) {
+      if (window.scrollY < 120) {
         setActiveSection('hero');
         return;
       }
 
+      const sections = ['about', 'skills', 'projects', 'journey', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -50,15 +45,7 @@ export const Navbar: React.FC = () => {
       }
     };
 
-    const handleScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateScroll);
-      }
-    };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
-    updateScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

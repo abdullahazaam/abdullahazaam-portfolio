@@ -1,0 +1,163 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "geometry": {
+        "hero": {
+          "x": 0,
+          "y": 83,
+          "width": 1440,
+          "height": 817,
+          "bottom": 900
+        },
+        "navBottom": 83,
+        "nextTop": 900,
+        "photo": {
+          "x": -360,
+          "y": 128.625,
+          "width": 1800,
+          "height": 725.75
+        },
+        "overflow": 0,
+        "loaded": true,
+        "links": [
+          "#projects",
+          "https://github.com/abdullahazaam"
+        ]
+      },
+      "pointer": {
+        "desk": "0.7271133490196922px",
+        "wall": "2.3267627168630147px"
+      },
+      "scroll": {
+        "desk": "-0.5058916341134276px",
+        "monitor": "-0.24229856989949947px",
+        "camera": "0.0036793079999999996",
+        "copy": "0.9693391",
+        "face": "none"
+      },
+      "errors": []
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "geometry": {
+        "hero": {
+          "x": 0,
+          "y": 83,
+          "width": 1024,
+          "height": 685,
+          "bottom": 768
+        },
+        "navBottom": 83,
+        "nextTop": 768,
+        "photo": {
+          "x": -256,
+          "y": 167.453125,
+          "width": 1280,
+          "height": 516.09375
+        },
+        "overflow": 0,
+        "loaded": true,
+        "links": [
+          "#projects",
+          "https://github.com/abdullahazaam"
+        ]
+      },
+      "pointer": {
+        "desk": "0.8500052447155269px",
+        "wall": "2.7200167830896858px"
+      },
+      "scroll": {
+        "desk": "-0.6149184913941753px",
+        "monitor": "-0.2957218199799356px",
+        "camera": "0.0043883279999999995",
+        "copy": "0.9634306",
+        "face": "none"
+      },
+      "errors": []
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "geometry": {
+        "hero": {
+          "x": 0,
+          "y": 73,
+          "width": 768,
+          "height": 951,
+          "bottom": 1024
+        },
+        "navBottom": 73,
+        "nextTop": 1024,
+        "photo": {
+          "x": -384,
+          "y": 145.0703125,
+          "width": 1152,
+          "height": 464.484375
+        },
+        "overflow": 0,
+        "loaded": true,
+        "links": [
+          "#projects",
+          "https://github.com/abdullahazaam"
+        ]
+      },
+      "pointer": {
+        "desk": "0.3062077502963083px",
+        "wall": "0.9798648009481866px"
+      },
+      "scroll": {
+        "desk": "-0.4588078812204156px",
+        "monitor": "-0.2195569307119091px",
+        "camera": "0.00335016",
+        "copy": "0.972082",
+        "face": "none"
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "geometry": {
+        "hero": {
+          "x": 0,
+          "y": 67,
+          "width": 390,
+          "height": 777,
+          "bottom": 844
+        },
+        "navBottom": 67,
+        "nextTop": 844,
+        "photo": {
+          "x": -280.796875,
+          "y": 131.4296875,
+          "width": 682.5,
+          "height": 275.171875
+        },
+        "overflow": 0,
+        "loaded": true,
+        "links": [
+          "#projects",
+          "https://github.com/abdullahazaam"
+        ]
+      },
+      "pointer": {
+        "desk": "0.30378503024008424px",
+        "wall": "0.9721120967682696px"
+      },
+      "scroll": {
+        "desk": "-0.5840997908230413px",
+        "monitor": "-0.2798819529801075px",
+        "camera": "0.004239378",
+        "copy": "0.96467185",
+        "face": "none"
+      },
+      "errors": []
+    }
+  ],
+  "changed": [
+    "components\\hero\\PhotoHero.tsx"
+  ]
+}
