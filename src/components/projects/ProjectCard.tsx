@@ -13,7 +13,8 @@ interface ProjectCardProps {
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, prominent = false }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [coords, setCoords] = useState({ x: 0, y: 0, px: 0, py: 0 });
+  const coordsRef = useRef({ x: 0, y: 0, px: 0, py: 0 });
+  const frameRef = useRef(0);
 
   const primaryUrl = project.liveUrl || project.githubUrl;
 
@@ -24,7 +25,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
     const y = e.clientY - rect.top;
     const px = (x / rect.width) - 0.5;
     const py = (y / rect.height) - 0.5;
-    setCoords({ x, y, px, py });
+    coordsRef.current = { x, y, px, py };
+
+    if (frameRef.current) return;
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = 0;
+      const el = cardRef.current;
+      if (!el) return;
+      const { x: curX, y: curY, px: curPx, py: curPy } = coordsRef.current;
+      el.style.setProperty('--card-rx', `${-curPy * 9}deg`);
+      el.style.setProperty('--card-ry', `${curPx * 9}deg`);
+      el.style.setProperty('--spot-x', `${curX}px`);
+      el.style.setProperty('--spot-y', `${curY}px`);
+      el.style.setProperty('--preview-x', `${curPx * 10}px`);
+      el.style.setProperty('--preview-y', `${curPy * 8}px`);
+    });
   };
 
   const handlePointerEnter = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -32,8 +47,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
     setIsHovered(true);
   };
   const handlePointerLeave = () => {
+    cancelAnimationFrame(frameRef.current);
+    frameRef.current = 0;
     setIsHovered(false);
-    setCoords({ x: 0, y: 0, px: 0, py: 0 });
+    const el = cardRef.current;
+    if (el) {
+      el.style.setProperty('--card-rx', '0deg');
+      el.style.setProperty('--card-ry', '0deg');
+      el.style.setProperty('--preview-x', '0px');
+      el.style.setProperty('--preview-y', '0px');
+    }
   };
 
 
@@ -45,12 +68,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
       window.open(primaryUrl, '_blank', 'noopener,noreferrer');
     }
   };
-
-  // Restrained 3D perspective tilt (max ~4.5 - 5 degrees for a clean, premium feel)
-  const rotateX = isHovered ? -coords.py * 9 : 0;
-  const rotateY = isHovered ? coords.px * 9 : 0;
-  const liftY = isHovered ? -8 : 0;
-  const liftZ = isHovered ? 18 : 0;
 
   return (
     <div style={{ perspective: '1100px' }} className="w-full">
@@ -66,7 +83,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
         transition={{ duration: 0.65, delay: index * 0.08, ease: 'easeOut' }}
         style={{
           transformStyle: 'preserve-3d',
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${liftY}px) translateZ(${liftZ}px)`,
+          transform: isHovered
+            ? 'rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg)) translateY(-8px) translateZ(18px)'
+            : 'rotateX(0deg) rotateY(0deg) translateY(0px) translateZ(0px)',
           transition: isHovered
             ? 'transform 0.12s ease-out, box-shadow 0.25s ease, border-color 0.25s ease'
             : 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease',
@@ -135,7 +154,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
           className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-500"
           style={{
             background: isHovered
-              ? `radial-gradient(320px circle at ${coords.x}px ${coords.y}px, rgba(229, 9, 20, 0.25), transparent 70%)`
+              ? `radial-gradient(320px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(229, 9, 20, 0.25), transparent 70%)`
               : `radial-gradient(240px circle at 85% 15%, rgba(229, 9, 20, 0.08), transparent 65%)`,
           }}
           aria-hidden="true"
@@ -155,7 +174,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
             className="project-preview-wrap mb-4 transition-transform duration-300"
             style={{
               transform: isHovered
-                ? `translate3d(${coords.px * 10}px, ${coords.py * 8}px, 26px)`
+                ? `translate3d(var(--preview-x, 0px), var(--preview-y, 0px), 26px)`
                 : 'translate3d(0, 0, 0)',
               transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out',
             }}
@@ -177,12 +196,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
               {/* Screen Visual — Screenshot with gentle hover zoom and glass scanline */}
               <div className="relative flex-1 min-h-0 overflow-hidden bg-[#050505]">
                 {project.imageUrl ? (
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                    className="w-full h-full object-contain object-top transition-all duration-500 group-hover:scale-[1.05]"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source srcSet={project.imageUrl.replace(/\.(png|jpg)$/i, '.webp')} type="image/webp" />
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      width={1280}
+                      height={720}
+                      className="w-full h-full object-contain object-top transition-all duration-500 group-hover:scale-[1.05]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-[#0C0C0C]">
                     <span className="font-mono text-xs text-neutral-500">{project.title}</span>

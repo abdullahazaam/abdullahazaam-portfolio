@@ -22,8 +22,16 @@ export const Hero = () => {
       let targetX = 0, targetY = 0;
       const fine = matchMedia('(hover: hover) and (pointer: fine)');
       let visible = true;
-      const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; hero.toggleAttribute('data-hero-paused', !visible); });
+      const onVisibilityChange = () => {
+        const isHidden = document.hidden || !visible;
+        hero.toggleAttribute('data-hero-paused', isHidden);
+      };
+      const visibility = new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        onVisibilityChange();
+      });
       visibility.observe(hero);
+      document.addEventListener('visibilitychange', onVisibilityChange);
       const move = (event: PointerEvent) => {
         if (!fine.matches || event.pointerType === 'touch') return;
         const r = hero.getBoundingClientRect();
@@ -32,7 +40,7 @@ export const Hero = () => {
       };
       const reset = () => { targetX = 0; targetY = 0; };
       const render = (_time: number, delta: number) => {
-        if (!visible) return;
+        if (!visible || document.hidden) return;
         const blend = 1-Math.exp(-Math.min(delta,64)/180);
         model.x += (targetX-model.x)*blend; model.y += (targetY-model.y)*blend;
         const small = hero.clientWidth <= 900;
@@ -50,7 +58,9 @@ export const Hero = () => {
       const tween = gsap.to(model,{scroll:1,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:.8}});
       gsap.ticker.add(render); hero.addEventListener('pointermove',move,{passive:true});hero.addEventListener('pointerleave',reset);window.addEventListener('blur',reset);
       return () => {
-        tween.scrollTrigger?.kill();tween.kill();gsap.ticker.remove(render);visibility.disconnect();hero.removeAttribute('data-hero-paused');
+        tween.scrollTrigger?.kill();tween.kill();gsap.ticker.remove(render);visibility.disconnect();
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        hero.removeAttribute('data-hero-paused');
         hero.removeEventListener('pointermove',move);hero.removeEventListener('pointerleave',reset);window.removeEventListener('blur',reset);
         ['--wall-x','--wall-y','--halo-x','--halo-y','--monitor-x','--monitor-y','--desk-x','--desk-y','--copy-y','--copy-opacity','--room-camera','--room-yaw'].forEach(name=>hero.style.removeProperty(name));
       };

@@ -1,5 +1,8 @@
 node_modules/
 dist/
+qa/
+*.log
 .env
 .env.*
 !.env.example
+

@@ -1,1 +1,0 @@
-{"extends":"../../tsconfig.json","include":["../../src/components/journey/Journey.tsx","../../src/components/contact/Contact.tsx"]}

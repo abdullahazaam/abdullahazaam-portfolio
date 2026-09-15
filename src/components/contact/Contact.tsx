@@ -1,5 +1,5 @@
 import { SectionDepth } from './SectionDepth';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Copy, Check, Send, Sparkles, MessageSquare, ArrowUpRight, Loader2, AlertCircle } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/Icons';
 
@@ -9,7 +9,28 @@ export const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const sectionRef = useRef<HTMLElement>(null);
   const emailAddress = 'abdullahazaam1505@gmail.com';
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let inView = false;
+    const update = () => {
+      el.toggleAttribute('data-section-paused', !inView || document.hidden);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      update();
+    }, { rootMargin: '300px 0px', threshold: 0.01 });
+    observer.observe(el);
+    document.addEventListener('visibilitychange', update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', update);
+      el.removeAttribute('data-section-paused');
+    };
+  }, []);
 
   const copyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -78,7 +99,7 @@ export const Contact: React.FC = () => {
 
 
   return (
-    <section id="contact" className="contact-upgraded relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20">
+    <section ref={sectionRef} id="contact" className="contact-upgraded relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20">
       <SectionDepth />
       {/* Soft Red Ambient Glow from Corner */}
       <div className="absolute top-1/2 -left-20 w-[750px] h-[750px] bg-[#260000]/40 rounded-full blur-[170px] pointer-events-none" />

@@ -27,6 +27,17 @@
 #journey.journey-upgraded .section-depth-line,#contact.contact-upgraded .section-depth-line { position: absolute; width: 70%; height: 1px; left: 20%; top: 75%; background: linear-gradient(90deg,transparent,#f9405429,transparent); rotate: -18deg; animation: section-line 15s ease-in-out infinite alternate; }
 @keyframes section-dust { to { transform: translate3d(13px,-30px,0); opacity: .15; } }
 @keyframes section-line { to { translate: 0 -30px; opacity: .3; } }
+#journey[data-section-paused] .route-energy,
+#journey[data-section-paused] .route-node,
+#journey[data-section-paused] .route-icon::after,
+#journey[data-section-paused] .section-depth i,
+#journey[data-section-paused] .section-depth-line,
+#contact[data-section-paused] .contact-form > .premium-card,
+#contact[data-section-paused] .premium-card::after,
+#contact[data-section-paused] .section-depth i,
+#contact[data-section-paused] .section-depth-line {
+  animation-play-state: paused;
+}
 #contact.contact-upgraded .contact-layout { grid-template-columns: 1.15fr 1.2fr .6fr; gap: 25px 38px; align-items: center; perspective: 1400px; }
 #contact.contact-upgraded .contact-heading { grid-column: 1; grid-row: 1; }
 #contact.contact-upgraded .contact-heading h2 { font-size: clamp(28px,2.7vw,40px) !important; }
