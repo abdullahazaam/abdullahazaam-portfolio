@@ -19,7 +19,7 @@ export function SkillCard({ tech, index, brandColor }: { tech: { name: string; r
     media.addEventListener('change', reset); window.addEventListener('blur', reset);
     return () => { cancelAnimationFrame(frame.current); media.removeEventListener('change', reset); window.removeEventListener('blur', reset); };
   }, []);
-  return <div ref={ref} className="skill-shell w-full relative flex items-center justify-center py-1" style={{ '--brand': brandColor, '--orbit-duration': `${30 + index % 5 * 3}s`, '--orbit-delay': `${-index * 2.7}s` } as CSSProperties}
+  return <div ref={ref} className="skill-shell w-full relative flex items-center justify-center py-1" style={{ '--brand': brandColor } as CSSProperties}
     onPointerMove={event => {
       if (event.pointerType === 'touch' || !canPoint()) return;
       const el = ref.current!; const r = el.getBoundingClientRect();
@@ -40,12 +40,10 @@ export function SkillCard({ tech, index, brandColor }: { tech: { name: string; r
         <rect className="skill-orbit-rail" x="2" y="2" width="156" height="146" rx="27" />
         <rect className="skill-orbit-primary skill-orbit-motion" pathLength="100" x="2" y="2" width="156" height="146" rx="27" />
         <rect className="skill-orbit-secondary skill-orbit-motion" pathLength="100" x="5" y="5" width="150" height="140" rx="35" />
-        <rect className="skill-orbit-node skill-orbit-motion" pathLength="100" x="2" y="2" width="156" height="146" rx="27" />
-        <rect className="skill-orbit-node skill-orbit-node-secondary skill-orbit-motion" pathLength="100" x="5" y="5" width="150" height="140" rx="35" />
       </svg>
       <div className="skill-arc-plane"><div className="skill-geometric-arc skill-orbit-motion" /></div>
     </div>
-    <div className="premium-card skill-card skill-front group relative rounded-2xl bg-[#080709]/95 border border-neutral-900/90 p-4 sm:p-5 backdrop-blur-md hover:border-[#E50914]/70 hover:bg-[#0E0C0E] flex flex-col items-center text-center justify-between min-h-[140px] select-none z-10 w-full">
+    <div className="premium-card skill-card skill-front group relative rounded-2xl bg-[#080709]/95 border border-neutral-900/90 p-4 sm:p-5 hover:border-[#E50914]/70 hover:bg-[#0E0C0E] flex flex-col items-center text-center justify-between min-h-[140px] select-none z-10 w-full">
       <span className="skill-edge-window" aria-hidden="true"><span className="skill-edge-beam skill-orbit-motion" /></span>
       <div className="skill-icon w-12 h-12 rounded-xl bg-[#111013] border border-neutral-800 flex items-center justify-center shadow-inner">{tech.icon}</div>
       <div className="mt-3 w-full"><h3 className="font-heading font-semibold text-sm text-white">{tech.name}</h3><p className="font-sans text-[11px] text-neutral-400 mt-0.5 truncate font-medium">{tech.role}</p></div>

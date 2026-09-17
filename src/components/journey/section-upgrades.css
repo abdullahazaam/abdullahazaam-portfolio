@@ -23,7 +23,7 @@
 #journey.journey-upgraded .mb-20 p { font-size: 13px; line-height: 1.7; }
 #journey.journey-upgraded .section-depth,#contact.contact-upgraded .section-depth { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
 #journey.journey-upgraded .section-depth i,#contact.contact-upgraded .section-depth i { position: absolute; width: 2px; height: 2px; background: #ee637d; border-radius: 50%; box-shadow: 0 0 7px #ff2a52; opacity: .45; animation: section-dust 18s ease-in-out infinite alternate; }
-#journey.journey-upgraded .section-depth-halo,#contact.contact-upgraded .section-depth-halo { position: absolute; inset: 15% 8%; background: radial-gradient(ellipse at 70% 60%,#95193419,transparent 60%); transform: translateY(calc(var(--section-shift,0px) * .5)); }
+#journey.journey-upgraded .section-depth-halo,#contact.contact-upgraded .section-depth-halo { position: absolute; inset: 15% 8%; background: radial-gradient(ellipse at 70% 60%,#95193419,transparent 60%); }
 #journey.journey-upgraded .section-depth-line,#contact.contact-upgraded .section-depth-line { position: absolute; width: 70%; height: 1px; left: 20%; top: 75%; background: linear-gradient(90deg,transparent,#f9405429,transparent); rotate: -18deg; animation: section-line 15s ease-in-out infinite alternate; }
 @keyframes section-dust { to { transform: translate3d(13px,-30px,0); opacity: .15; } }
 @keyframes section-line { to { translate: 0 -30px; opacity: .3; } }

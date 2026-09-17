@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,8 +9,24 @@ export function PremiumEffects() {
   useEffect(() => {
     const media = gsap.matchMedia();
 
+    const sectionIds = ['about', 'skills', 'projects', 'journey', 'contact'];
+    const createdGlows: HTMLElement[] = [];
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (!section) return;
+      let glow = section.querySelector<HTMLElement>(':scope > .section-ambient-glow');
+      if (!glow) {
+        glow = document.createElement('div');
+        glow.className = 'section-ambient-glow';
+        glow.setAttribute('aria-hidden', 'true');
+        section.prepend(glow);
+        createdGlows.push(glow);
+      }
+    });
+
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      ['about', 'skills', 'projects', 'journey', 'contact'].forEach((id, index) => {
+      sectionIds.forEach((id, index) => {
         const section = document.getElementById(id);
         if (!section) return;
 
@@ -58,12 +74,28 @@ export function PremiumEffects() {
           );
         }
 
-        // Subtle Section Shift
-        gsap.to(section, {
-          '--section-shift': `${index % 2 ? -40 : 40}px`,
-          ease: 'none',
-          scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 1 },
-        });
+        // Direct compositor transforms for subtle depth parallax (NO inherited CSS variable updates)
+        const glow = section.querySelector<HTMLElement>(':scope > .section-ambient-glow');
+        const shiftTarget = index % 2 ? -40 : 40;
+
+        if (glow) {
+          gsap.to(glow, {
+            y: shiftTarget,
+            ease: 'none',
+            force3D: true,
+            scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 1 },
+          });
+        }
+
+        const halo = section.querySelector<HTMLElement>('.section-depth-halo');
+        if (halo) {
+          gsap.to(halo, {
+            y: shiftTarget * 0.5,
+            ease: 'none',
+            force3D: true,
+            scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 1 },
+          });
+        }
       });
     });
 
@@ -149,7 +181,10 @@ export function PremiumEffects() {
       };
     });
 
-    return () => media.revert();
+    return () => {
+      media.revert();
+      createdGlows.forEach((g) => g.remove());
+    };
   }, []);
 
   return null;

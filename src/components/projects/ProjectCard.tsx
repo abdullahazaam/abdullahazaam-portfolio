@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { CleanProject } from '../../data/projects';
@@ -12,30 +12,113 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, prominent = false }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
+  const pendingCoords = useRef<{ clientX: number; clientY: number } | null>(null);
+
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const liftY = useMotionValue(0);
+  const liftZ = useMotionValue(0);
+
   const [isHovered, setIsHovered] = useState(false);
-  const [coords, setCoords] = useState({ x: 0, y: 0, px: 0, py: 0 });
 
   const primaryUrl = project.liveUrl || project.githubUrl;
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === 'touch' || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  const updateHoverEffects = () => {
+    rafId.current = null;
+    const card = cardRef.current;
+    const coords = pendingCoords.current;
+    if (!card || !coords) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = coords.clientX - rect.left;
+    const y = coords.clientY - rect.top;
     const px = (x / rect.width) - 0.5;
     const py = (y / rect.height) - 0.5;
-    setCoords({ x, y, px, py });
+
+    const rx = -py * 9;
+    const ry = px * 9;
+
+    rotateX.set(rx);
+    rotateY.set(ry);
+    liftY.set(-8);
+    liftZ.set(18);
+
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+    card.style.setProperty('--card-rx', `${rx}deg`);
+    card.style.setProperty('--card-ry', `${ry}deg`);
+    card.style.setProperty('--preview-x', `${px * 10}px`);
+    card.style.setProperty('--preview-y', `${py * 8}px`);
+
+    if (spotlightRef.current) {
+      spotlightRef.current.style.background = `radial-gradient(320px circle at ${x}px ${y}px, rgba(229, 9, 20, 0.25), transparent 70%)`;
+    }
+
+    if (previewRef.current) {
+      previewRef.current.style.transform = `translate3d(${px * 10}px, ${py * 8}px, 26px)`;
+    }
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch' || !cardRef.current) return;
+    pendingCoords.current = { clientX: e.clientX, clientY: e.clientY };
+    if (rafId.current === null) {
+      rafId.current = requestAnimationFrame(updateHoverEffects);
+    }
   };
 
   const handlePointerEnter = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === 'touch') return;
     setIsHovered(true);
-  };
-  const handlePointerLeave = () => {
-    setIsHovered(false);
-    setCoords({ x: 0, y: 0, px: 0, py: 0 });
+    pendingCoords.current = { clientX: e.clientX, clientY: e.clientY };
+    if (rafId.current === null) {
+      rafId.current = requestAnimationFrame(updateHoverEffects);
+    }
   };
 
+  const handlePointerLeave = () => {
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
+    pendingCoords.current = null;
+    setIsHovered(false);
+
+    rotateX.set(0);
+    rotateY.set(0);
+    liftY.set(0);
+    liftZ.set(0);
+
+    const card = cardRef.current;
+    if (card) {
+      card.style.setProperty('--mouse-x', '0px');
+      card.style.setProperty('--mouse-y', '0px');
+      card.style.setProperty('--card-rx', '0deg');
+      card.style.setProperty('--card-ry', '0deg');
+      card.style.setProperty('--preview-x', '0px');
+      card.style.setProperty('--preview-y', '0px');
+    }
+
+    if (spotlightRef.current) {
+      spotlightRef.current.style.background = 'radial-gradient(240px circle at 85% 15%, rgba(229, 9, 20, 0.08), transparent 65%)';
+    }
+
+    if (previewRef.current) {
+      previewRef.current.style.transform = 'translate3d(0, 0, 0)';
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+        rafId.current = null;
+      }
+    };
+  }, []);
 
   // Whole card click handler (respects child button/link clicks)
   const handleCardClick = (e: React.MouseEvent) => {
@@ -45,12 +128,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
       window.open(primaryUrl, '_blank', 'noopener,noreferrer');
     }
   };
-
-  // Restrained 3D perspective tilt (max ~4.5 - 5 degrees for a clean, premium feel)
-  const rotateX = isHovered ? -coords.py * 9 : 0;
-  const rotateY = isHovered ? coords.px * 9 : 0;
-  const liftY = isHovered ? -8 : 0;
-  const liftZ = isHovered ? 18 : 0;
 
   return (
     <div style={{ perspective: '1100px' }} className="w-full">
@@ -66,7 +143,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
         transition={{ duration: 0.65, delay: index * 0.08, ease: 'easeOut' }}
         style={{
           transformStyle: 'preserve-3d',
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${liftY}px) translateZ(${liftZ}px)`,
+          rotateX,
+          rotateY,
+          y: liftY,
+          z: liftZ,
           transition: isHovered
             ? 'transform 0.12s ease-out, box-shadow 0.25s ease, border-color 0.25s ease'
             : 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease',
@@ -82,21 +162,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
             : 'border-red-950/40 p-5 sm:p-6'
         }`}
       >
-        {/* Continuous 360° Perimeter Border Beam Highlight */}
-        <div
-          className="absolute -inset-[120%] pointer-events-none z-0 will-change-transform"
-          style={{
-            background: isHovered
-              ? 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 270deg, rgba(229,9,20,0.6) 310deg, #ff1a38 340deg, #ff7084 355deg, #ff1a38 360deg)'
-              : 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 285deg, rgba(229,9,20,0.35) 320deg, #E50914 345deg, transparent 360deg)',
-            animation: `border-beam-spin ${isHovered ? '4.5s' : '9.5s'} linear infinite`,
-          }}
-          aria-hidden="true"
-        />
+        {/* Continuous 360° Perimeter Border Beam Highlight (Isolated GPU Layer) */}
+        <div className="project-beam-isolation" aria-hidden="true">
+          <div
+            className="project-beam-rotator"
+            style={{
+              background: isHovered
+                ? 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 270deg, rgba(229,9,20,0.6) 310deg, #ff1a38 340deg, #ff7084 355deg, #ff1a38 360deg)'
+                : 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 285deg, rgba(229,9,20,0.35) 320deg, #E50914 345deg, transparent 360deg)',
+              animation: `border-beam-spin ${isHovered ? '4.5s' : '9.5s'} linear infinite`,
+            }}
+          />
+        </div>
 
         {/* Dark Obsidian Glass Card Body - Inset by 1.5px to reveal perimeter beam */}
         <div
-          className="absolute inset-[1.5px] rounded-[11px] bg-[#09080A]/95 backdrop-blur-md pointer-events-none z-0"
+          className="absolute inset-[1.5px] rounded-[11px] bg-[#09080A]/95 pointer-events-none z-0"
           aria-hidden="true"
         />
 
@@ -132,11 +213,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
 
         {/* Dynamic Cursor-Follow Red Spotlight & Ambient Glow */}
         <div
+          ref={spotlightRef}
           className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-500"
           style={{
             background: isHovered
-              ? `radial-gradient(320px circle at ${coords.x}px ${coords.y}px, rgba(229, 9, 20, 0.25), transparent 70%)`
-              : `radial-gradient(240px circle at 85% 15%, rgba(229, 9, 20, 0.08), transparent 65%)`,
+              ? 'radial-gradient(320px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(229, 9, 20, 0.25), transparent 70%)'
+              : 'radial-gradient(240px circle at 85% 15%, rgba(229, 9, 20, 0.08), transparent 65%)',
           }}
           aria-hidden="true"
         />
@@ -152,10 +234,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
         <div className="relative z-10" style={{ transform: 'translateZ(10px)' }}>
           {/* Screenshot / High-Tech Preview Window with Parallax Shift */}
           <div
+            ref={previewRef}
             className="project-preview-wrap mb-4 transition-transform duration-300"
             style={{
               transform: isHovered
-                ? `translate3d(${coords.px * 10}px, ${coords.py * 8}px, 26px)`
+                ? 'translate3d(var(--preview-x, 0px), var(--preview-y, 0px), 26px)'
                 : 'translate3d(0, 0, 0)',
               transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out',
             }}

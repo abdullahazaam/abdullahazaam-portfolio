@@ -5,17 +5,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const BackgroundAtmosphere: React.FC = () => {
   const root = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const streakRef = useRef<HTMLDivElement>(null);
+  const networkRef = useRef<SVGSVGElement>(null);
+
   useEffect(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.to(root.current, { '--atmosphere-y': '-110px', ease: 'none', scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom bottom', scrub: 1 } });
+      const grid = gridRef.current;
+      const streak = streakRef.current;
+      const network = networkRef.current;
+      if (!grid || !streak || !network) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom bottom', scrub: 1 }
+      });
+      tl.to([grid, streak], { y: -110, ease: 'none', force3D: true }, 0);
+      tl.to(network, { y: -110 * 0.35, ease: 'none', force3D: true }, 0);
     });
     return () => media.revert();
   }, []);
   return <div ref={root} className="crimson-atmosphere" aria-hidden="true">
     <div className="atmosphere-haze haze-one" /><div className="atmosphere-haze haze-two" />
-    <div className="atmosphere-grid" /><div className="atmosphere-streak" />
-    <svg className="atmosphere-network" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <div ref={gridRef} className="atmosphere-grid" /><div ref={streakRef} className="atmosphere-streak" />
+    <svg ref={networkRef} className="atmosphere-network" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
       <defs><radialGradient id="network-dot"><stop stopColor="#ff5b6f" /><stop offset=".25" stopColor="#f71331" stopOpacity=".65" /><stop offset="1" stopColor="#e50914" stopOpacity="0" /></radialGradient></defs>
       {Array.from({ length: 42 }, (_, i) => {
         const x = ((i * 173 + 31) % 1500) - 30, y = ((i * 263 + 51) % 980) - 40;

@@ -21,32 +21,76 @@ export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 25) {
-        setActiveSection('contact');
-        return;
-      }
-      if (window.scrollY < 120) {
-        setActiveSection('hero');
-        return;
-      }
+    const sectionIds = ['about', 'skills', 'projects', 'journey', 'contact'];
+    const sectionElements = new Map<string, HTMLElement>();
 
-      const sections = ['about', 'skills', 'projects', 'journey', 'contact'];
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 160 && rect.bottom > 160) {
-            setActiveSection(sectionId);
-            break;
+    const getSectionElement = (id: string): HTMLElement | null => {
+      let el = sectionElements.get(id);
+      if (!el || !el.isConnected) {
+        const found = document.getElementById(id);
+        if (found) {
+          sectionElements.set(id, found);
+          el = found;
+        } else {
+          return null;
+        }
+      }
+      return el;
+    };
+
+    // Pre-populate cache
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) sectionElements.set(id, el);
+    }
+
+    let rafId: number | null = null;
+
+    const updateScrollState = () => {
+      rafId = null;
+      const scrollY = window.scrollY;
+      const isScrolled = scrollY > 30;
+
+      setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
+
+      let newActive = 'hero';
+      if (scrollY + window.innerHeight >= document.documentElement.scrollHeight - 25) {
+        newActive = 'contact';
+      } else if (scrollY < 120) {
+        newActive = 'hero';
+      } else {
+        for (const sectionId of sectionIds) {
+          const el = getSectionElement(sectionId);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 160 && rect.bottom > 160) {
+              newActive = sectionId;
+              break;
+            }
           }
         }
       }
+
+      setActiveSection((prev) => (prev !== newActive ? newActive : prev));
     };
 
+    const handleScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateScrollState);
+      }
+    };
+
+    // Initial check
+    updateScrollState();
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
   }, []);
 
   // Keyboard escape key listener for mobile drawer
@@ -81,9 +125,9 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu ${
         scrolled
-          ? 'py-3.5 bg-[#050505]/85 backdrop-blur-lg border-b border-red-950/40 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
+          ? 'py-3.5 bg-[#050505]/85 backdrop-blur-[12px] border-b border-red-950/40 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
           : 'py-5 bg-transparent border-b border-white/[0.04]'
       }`}
     >
@@ -113,7 +157,7 @@ export const Navbar: React.FC = () => {
         </a>
 
         {/* Center/Right: Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full bg-[#0A0A0A]/80 border border-white/[0.06] backdrop-blur-md">
+        <nav className="hidden lg:flex items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full bg-[#0A0A0A]/90 border border-white/[0.06]">
           {navItems.map((item) => {
             const isActive = activeSection === item.href.replace('#', '');
             return (

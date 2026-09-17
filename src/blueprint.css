@@ -57,8 +57,8 @@ main > section > .max-w-7xl { width: 100%; margin-block: auto; }
     padding-block: 0 !important;
   }
 }
-main > section::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 10% 65%, #6f071514, transparent 60%); transform: translateY(var(--section-shift,0px)); pointer-events: none; }
-main > section:nth-of-type(even)::before { background: radial-gradient(ellipse at 92% 50%, #910b181e, transparent 60%); }
+.section-ambient-glow { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 10% 65%, #6f071514, transparent 60%); pointer-events: none; }
+main > section:nth-of-type(even) > .section-ambient-glow { background: radial-gradient(ellipse at 92% 50%, #910b181e, transparent 60%); }
 main h2 { font-size: clamp(26px, 2.5vw, 36px) !important; line-height: 1.2 !important; letter-spacing: -.045em !important; font-weight: 750 !important; }
 main h2 .text-transparent { background: none; color: var(--accent); }
 main > section .font-mono.uppercase { background: transparent; border: 0; border-radius: 0; padding: 0; margin-bottom: 12px; font: 700 10px/1.5 'Plus Jakarta Sans',sans-serif; letter-spacing: .29em; color: var(--accent); }
@@ -171,19 +171,19 @@ header .header-cta > span:first-of-type { display: none; }
 }
 
 /* Continuous red technical network, haze, particles and fine grid. */
-.crimson-atmosphere { --atmosphere-y: 0px; position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: #050305; }
+.crimson-atmosphere { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: #050305; }
 .atmosphere-haze { position: absolute; width: 105vw; height: 105vh; }
 .haze-one { left: -40%; top: -40%; background: radial-gradient(ellipse,#78031032,transparent 65%); animation: haze-drift 24s ease-in-out infinite alternate; }
 .haze-two { right: -45%; bottom: -40%; background: radial-gradient(ellipse,#8e061b33,transparent 65%); animation: haze-drift 30s ease-in-out -12s infinite alternate-reverse; }
-.atmosphere-grid { position: absolute; inset: -120px 0; background: linear-gradient(#e8293507 1px,transparent 1px),linear-gradient(90deg,#e8293507 1px,transparent 1px); background-size: 64px 64px; transform: translateY(var(--atmosphere-y)); }
-.atmosphere-network { position: absolute; inset: -6%; width: 112%; height: 112%; opacity: .75; mask-image: linear-gradient(90deg,#000, #0008 32%,#0003 58%,#000 95%); transform: translateY(calc(var(--atmosphere-y) * .35)); }
-.atmosphere-streak { position: absolute; width: 65vw; height: 1px; background: linear-gradient(90deg,transparent,#fc153f50,transparent); top: 45%; left: -24%; rotate: 28deg; box-shadow: 0 0 15px 2px #e910282a; transform: translateY(var(--atmosphere-y)); }
+.atmosphere-grid { position: absolute; inset: -120px 0; background: linear-gradient(#e8293507 1px,transparent 1px),linear-gradient(90deg,#e8293507 1px,transparent 1px); background-size: 64px 64px; }
+.atmosphere-network { position: absolute; inset: -6%; width: 112%; height: 112%; opacity: .75; mask-image: linear-gradient(90deg,#000, #0008 32%,#0003 58%,#000 95%); }
+.atmosphere-streak { position: absolute; width: 65vw; height: 1px; background: linear-gradient(90deg,transparent,#fc153f50,transparent); top: 45%; left: -24%; rotate: 28deg; box-shadow: 0 0 15px 2px #e910282a; }
 .atmosphere-particle { position: absolute; height: 2px; width: 2px; border-radius: 50%; background: #ff4b62; box-shadow: 0 0 8px #e91539; animation: dust-drift 20s linear infinite; }
 @keyframes haze-drift { to { transform: translate3d(7%,9%,0) scale(1.08); } }
 @keyframes dust-drift { to { transform: translate3d(18px,-85px,0); } }
 
 /* Dark glass with restrained red seams, retaining independent reveal transforms. */
-.premium-card { --light-x: 50%; --light-y: 0%; position: relative; isolation: isolate; background: linear-gradient(140deg,#281015ad,#0c0b0ee8 45%,#10090cd9) !important; border: 1px solid #79303d6b !important; border-radius: 9px !important; box-shadow: inset 0 1px #ffffff0d,0 12px 25px -13px #000c !important; backdrop-filter: blur(10px); rotate: var(--tilt-axis,1 0 0) var(--tilt-angle,0deg); transition: rotate .3s ease-out,translate .3s,border-color .3s,box-shadow .3s !important; }
+.premium-card { --light-x: 50%; --light-y: 0%; position: relative; isolation: isolate; background: linear-gradient(140deg,#281015ad,#0c0b0ee8 45%,#10090cd9) !important; border: 1px solid #79303d6b !important; border-radius: 9px !important; box-shadow: inset 0 1px #ffffff0d,0 12px 25px -13px #000c !important; rotate: var(--tilt-axis,1 0 0) var(--tilt-angle,0deg); transition: rotate .3s ease-out,translate .3s,border-color .3s,box-shadow .3s !important; }
 .project-card, .skill-card { rotate: none !important; }
 .premium-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1; pointer-events: none; background: radial-gradient(300px circle at var(--light-x) var(--light-y),#ff183527,transparent 75%); opacity: .25; transition: opacity .4s; }
 .premium-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: linear-gradient(120deg,#f1304766,#ffffff05 33%,#d7132540 75%,#ffffff07); mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); mask-composite: exclude; background-size: 200% 200%; transition: opacity .4s,background-position .6s; }
@@ -263,8 +263,30 @@ header .header-cta > span:first-of-type { display: none; }
   to { stroke-dashoffset: 400; }
 }
 @keyframes border-beam-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  from { transform: translate(-50%, -50%) translateZ(0) rotate(0deg); }
+  to { transform: translate(-50%, -50%) translateZ(0) rotate(360deg); }
+}
+
+.project-beam-isolation {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  contain: paint;
+  z-index: 0;
+}
+
+.project-beam-rotator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 580px;
+  height: 580px;
+  will-change: transform;
+  transform: translate(-50%, -50%) translateZ(0);
+  backface-visibility: hidden;
+  pointer-events: none;
 }
 
 .projects-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 16px; }

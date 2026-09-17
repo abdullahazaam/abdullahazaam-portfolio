@@ -188,7 +188,7 @@ export const Contact: React.FC = () => {
               CENTER: Clean Contact Form (5 Columns)
              =================================================== */}
           <div className="contact-form">
-            <div className="premium-card rounded-3xl bg-[#0A0A0A]/95 border border-neutral-900 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.85)]">
+            <div className="premium-card rounded-3xl bg-[#0A0A0A]/95 border border-neutral-900 p-6 sm:p-8 relative overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.85)]">
               {/* Top red glow accent */}
               <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#E50914] to-transparent opacity-80" />
 

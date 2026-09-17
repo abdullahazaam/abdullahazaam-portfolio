@@ -56,29 +56,62 @@ const brandColors = [
 ];
 
 export const Skills: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    const section = sectionRef.current;
     const grid = gridRef.current;
-    if (!grid) return;
+    if (!section || !grid) return;
     const cards = Array.from(grid.querySelectorAll<HTMLElement>('.skill-shell'));
+
+    // Section-level observer to pause/resume continuous decorative animations with lead margin
+    const pauseObserver = new IntersectionObserver(([entry]) => {
+      const isNear = entry.isIntersecting;
+      section.toggleAttribute('data-orbit-paused', !isNear);
+      cards.forEach(card => card.toggleAttribute('data-orbit-paused', !isNear));
+    }, { rootMargin: '100px 0px -50px 0px', threshold: 0 });
+
+    pauseObserver.observe(section);
+
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       let revealed = false;
       gsap.set(cards, { opacity: 0, y: 17, z: -20, rotateX: 7 });
-      const observer = new IntersectionObserver(([entry]) => {
-        cards.forEach(card => card.toggleAttribute('data-orbit-paused', !entry.isIntersecting));
+      const revealObserver = new IntersectionObserver(([entry]) => {
         if (!entry.isIntersecting || revealed) return;
         revealed = true;
         const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-        gsap.to(cards, { opacity: 1, y: 0, z: 0, rotateX: 0, duration: .65, ease: 'power3.out', stagger: index => Math.floor(index / columns) * .18 + (index % columns) * .04, clearProps: 'transform,opacity' });
-      }, { rootMargin: '0px 0px -6% 0px', threshold: .05 });
-      observer.observe(grid);
-      return () => { observer.disconnect(); gsap.killTweensOf(cards); gsap.set(cards, { clearProps: 'transform,opacity' }); cards.forEach(card => card.removeAttribute('data-orbit-paused')); };
+        gsap.to(cards, {
+          opacity: 1,
+          y: 0,
+          z: 0,
+          rotateX: 0,
+          duration: 0.65,
+          ease: 'power3.out',
+          stagger: index => Math.floor(index / columns) * 0.18 + (index % columns) * 0.04,
+          clearProps: 'transform,opacity',
+        });
+        revealObserver.disconnect();
+      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+
+      revealObserver.observe(grid);
+
+      return () => {
+        revealObserver.disconnect();
+        gsap.killTweensOf(cards);
+        gsap.set(cards, { clearProps: 'transform,opacity' });
+      };
     });
-    return () => media.revert();
+
+    return () => {
+      pauseObserver.disconnect();
+      media.revert();
+      section.removeAttribute('data-orbit-paused');
+      cards.forEach(card => card.removeAttribute('data-orbit-paused'));
+    };
   }, []);
   return (
-    <section id="skills" className="relative py-12 md:py-16 overflow-hidden border-t border-red-950/25">
+    <section id="skills" ref={sectionRef} data-orbit-paused className="relative py-12 md:py-16 overflow-hidden border-t border-red-950/25">
       {/* Layer 1: Slow Red Radial Glow Drifting Behind Grid */}
       <div
         className="skills-ambient-glow absolute pointer-events-none rounded-full"
@@ -149,7 +182,7 @@ export const Skills: React.FC = () => {
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute rounded-full"
+            className="skills-particle absolute rounded-full"
             style={{
               width: `${1.5 + (i % 2.5)}px`,
               height: `${1.5 + (i % 2.5)}px`,
