@@ -6,10 +6,10 @@ import { Code2, ArrowRight } from 'lucide-react';
 export const Projects: React.FC = () => {
 
   return (
-    <section id="projects" className="relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20">
+    <section id="projects" className="relative bg-[#070607] border-t border-red-950/20">
       {/* Deep Red Atmosphere Behind Featured Projects */}
-      <div className="absolute top-1/4 -right-40 w-[650px] h-[650px] bg-[#260000]/40 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-40 w-[650px] h-[650px] bg-[#1A0000]/30 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 -right-32 w-[750px] h-[750px] bg-[#3a0208]/45 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-32 w-[750px] h-[750px] bg-[#320106]/40 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
         {/* Split Header matching full-structure.png */}

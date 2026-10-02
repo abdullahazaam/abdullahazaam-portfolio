@@ -21,10 +21,11 @@ export const About: React.FC = () => {
   };
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-[#030303] overflow-hidden border-t border-red-950/20">
-      {/* Subtle Red Atmospheric Background Field */}
-      <div className="absolute top-1/2 -left-48 w-[650px] h-[650px] bg-[#1A0000]/40 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/3 right-0 w-[450px] h-[450px] bg-[#120000]/30 rounded-full blur-[140px] pointer-events-none" />
+    <section id="about" className="relative py-24 sm:py-32 bg-[#070607] overflow-hidden border-t border-red-950/20">
+      {/* Radiant Red Atmospheric Background Field */}
+      <div className="absolute top-1/2 -left-32 w-[750px] h-[750px] bg-[#3a0208]/45 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-[550px] h-[550px] bg-[#320106]/40 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute -bottom-20 left-1/3 w-[500px] h-[500px] bg-[#e50914]/15 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">

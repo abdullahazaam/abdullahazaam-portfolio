@@ -14,7 +14,6 @@ main > section > .max-w-7xl { width: 100%; margin-block: auto; }
   #hero,
   #about,
   #skills,
-  #projects,
   #journey,
   #contact {
     position: relative;
@@ -32,6 +31,22 @@ main > section > .max-w-7xl { width: 100%; margin-block: auto; }
     padding-block: 0 !important;
     margin-block: 0 !important;
     overflow: hidden !important;
+    isolation: isolate;
+  }
+
+  #projects {
+    position: relative;
+    width: 100%;
+    height: auto !important;
+    min-height: calc(100vh - 72px) !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding-block: clamp(48px, 6vh, 84px) !important;
+    margin-block: 0 !important;
+    overflow: visible !important;
     isolation: isolate;
   }
 
@@ -289,16 +304,45 @@ header .header-cta > span:first-of-type { display: none; }
   pointer-events: none;
 }
 
-.projects-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 16px; }
-.project-card { padding: 12px 10px !important; border-radius: 12px !important; min-width: 0; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+.project-card {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 14px 12px !important;
+  border-radius: 12px !important;
+  min-width: 0;
+  box-sizing: border-box !important;
+}
 .project-preview { aspect-ratio: 1.8; border-radius: 7px; border: 1px solid #ffffff15; background: #070707; }
 .project-preview img { object-fit: contain; object-position: center; }
 .project-card .project-preview-wrap { margin-bottom: 11px; }
-.project-card h3 { font-size: 17px !important; line-height: 1.25; letter-spacing: -.03em; color: #f1edf2 !important; }
-.project-card h3 + div { gap: 4px; margin-top: 7px; }
+.project-card h3 { font-size: 17px !important; line-height: 1.25; letter-spacing: -.03em; color: #f1edf2 !important; min-height: 22px; }
+.project-card h3 + div { gap: 4px; margin-top: 7px; min-height: 24px; align-items: center; }
 .project-card h3 + div span { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; border-color: #ae203c70; background: #050507; color: #ded9e1; }
-.project-card p { font-size: 12px; line-height: 1.55; margin-top: 9px; display: block; -webkit-line-clamp: 3; }
-.project-card > div:last-child { margin-top: 14px; padding-top: 8px; border-top: 1px solid #ffffff0d; gap: 8px; }
+.project-card p {
+  font-size: 12px;
+  line-height: 1.55;
+  margin-top: 9px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 56px;
+}
+.project-card > div:last-child {
+  margin-top: auto !important;
+  padding-top: 10px;
+  border-top: 1px solid #ffffff0d;
+  gap: 8px;
+}
 .project-card > div:last-child a:first-child { background: var(--accent); border-radius: 6px; padding: 9px 8px; font-size: 11px; text-transform: none; letter-spacing: 0; box-shadow: 0 0 16px #ff0e2b40; }
 .project-card > div:last-child a:last-child { border-radius: 6px; padding: 7px; background: #0c0a0d; border-color: #2e1017; }
 

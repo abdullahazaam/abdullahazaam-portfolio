@@ -116,12 +116,12 @@ export const Skills: React.FC = () => {
       <div
         className="skills-ambient-glow absolute pointer-events-none rounded-full"
         style={{
-          width: '780px',
-          height: '540px',
+          width: '880px',
+          height: '620px',
           top: '50%',
           left: '50%',
-          background: 'radial-gradient(circle, rgba(229, 9, 20, 0.2) 0%, rgba(120, 0, 10, 0.1) 45%, transparent 75%)',
-          filter: 'blur(130px)',
+          background: 'radial-gradient(circle, rgba(255, 20, 35, 0.32) 0%, rgba(180, 10, 20, 0.18) 45%, transparent 75%)',
+          filter: 'blur(120px)',
           animation: 'crimson-glow-drift 18s ease-in-out infinite alternate',
         }}
         aria-hidden="true"

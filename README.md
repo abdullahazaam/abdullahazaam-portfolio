@@ -93,6 +93,7 @@ npm run preview
 
 | Project | Description | Stack | Links |
 | :--- | :--- | :--- | :--- |
+| **Fan Hub Plus** | Cinematic full-stack fandom platform connecting Anime, Gaming, Movies, TV Shows, K-Pop, Comics, Manga and Cosplay in one interactive universe. | React, TypeScript, ASP.NET Core, SQL Server | [Live Demo](https://fan-hub-plus-six.vercel.app/) • [GitHub](https://github.com/abdullahazaam/Fan-Hub-Plus) |
 | **NEXUS 2050** | Interactive 3D smart-city intelligence platform with real-time WebGL rendering, procedural shaders, and GSAP scroll trajectories. | React, Three.js, GSAP | [Live Demo](https://nexus-2050.vercel.app) • [GitHub](https://github.com/abdullahazaam/NEXUS-2050) |
 | **Hamara Commerce** | Enterprise e-commerce application featuring ASP.NET Core MVC architecture, SQL Server database integration, session store, and secure order processing. | ASP.NET Core, SQL Server | [Live Demo](http://hamara-commerce.runasp.net/) • [GitHub](https://github.com/abdullahazaam/Hamara-Ecommerce) |
 | **PathSeeker** | Intelligent career guidance platform featuring psychometric assessment workflows, scoring algorithms, and multi-tier user role portals. | Laravel, MySQL | [Live Demo](https://path-seeker-production.up.railway.app) • [GitHub](https://github.com/abdullahazaam/Path-Seeker) |

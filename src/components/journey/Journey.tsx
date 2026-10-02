@@ -23,10 +23,10 @@ export const Journey: React.FC = () => {
     <section
       
       id="journey"
-      className="journey-upgraded relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20"
+      className="journey-upgraded relative py-28 bg-[#070607] overflow-hidden border-t border-red-950/20"
     >
       {/* Background atmosphere */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[700px] bg-[#1A0000]/28 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[800px] h-[800px] bg-[#3a0208]/40 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="journey-landscape" aria-hidden="true" />
       <SectionDepth />

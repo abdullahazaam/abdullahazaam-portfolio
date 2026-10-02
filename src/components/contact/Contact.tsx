@@ -78,11 +78,11 @@ export const Contact: React.FC = () => {
 
 
   return (
-    <section id="contact" className="contact-upgraded relative py-28 bg-[#030303] overflow-hidden border-t border-red-950/20">
+    <section id="contact" className="contact-upgraded relative py-28 bg-[#070607] overflow-hidden border-t border-red-950/20">
       <SectionDepth />
       {/* Soft Red Ambient Glow from Corner */}
-      <div className="absolute top-1/2 -left-20 w-[750px] h-[750px] bg-[#260000]/40 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[550px] h-[550px] bg-[#1A0000]/30 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 -left-20 w-[850px] h-[850px] bg-[#3a0208]/45 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[650px] h-[650px] bg-[#320106]/40 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
         <div className="contact-layout">

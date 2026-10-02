@@ -8,11 +8,25 @@ export interface CleanProject {
   tags: string[];
   liveUrl?: string;
   githubUrl: string;
-  previewType: 'nexus' | 'commerce' | 'career' | 'greetings' | 'logistics';
+  previewType: 'fandom' | 'nexus' | 'commerce' | 'career' | 'greetings' | 'logistics';
   imageUrl?: string;
 }
 
 export const projects: CleanProject[] = [
+  {
+    id: 'fan-hub-plus',
+    title: 'Fan Hub Plus',
+    subtitle: 'Cinematic Multi-Fandom Universe Platform',
+    category: 'Full-Stack Fandom Platform',
+    featured: true,
+    shortDescription:
+      'A cinematic full-stack fandom platform connecting Anime, Gaming, Movies, TV Shows, K-Pop, Comics, Manga and Cosplay in one interactive universe.',
+    tags: ['React', 'TypeScript', 'ASP.NET Core', 'SQL Server'],
+    liveUrl: 'https://fan-hub-plus-six.vercel.app/',
+    githubUrl: 'https://github.com/abdullahazaam/Fan-Hub-Plus',
+    previewType: 'fandom',
+    imageUrl: '/fan-hub-plus.png'
+  },
   {
     id: 'nexus-2050',
     title: 'NEXUS 2050',

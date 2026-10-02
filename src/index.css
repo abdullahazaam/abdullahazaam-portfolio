@@ -4,17 +4,17 @@
 
 @layer base {
   * {
-    border-color: rgba(229, 9, 20, 0.12);
+    border-color: rgba(229, 9, 20, 0.20);
   }
   
   html {
     color-scheme: dark;
-    background-color: #030303;
+    background-color: #070607;
   }
 
   body {
-    background-color: #030303;
-    color: #F5F5F5;
+    background-color: #070607;
+    color: #FBFBFB;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     letter-spacing: -0.01em;
     overflow-x: hidden;
@@ -73,36 +73,41 @@
   .bg-grid-cyber {
     background-size: 44px 44px;
     background-image: 
-      linear-gradient(to right, rgba(229, 9, 20, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(229, 9, 20, 0.03) 1px, transparent 1px);
+      linear-gradient(to right, rgba(229, 9, 20, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(229, 9, 20, 0.07) 1px, transparent 1px);
   }
 
   .bg-radial-vignette {
     background: radial-gradient(circle at 50% 50%, transparent 35%, #030303 100%);
   }
 
-  /* Section-specific atmospheric light layers */
+  /* Section-specific atmospheric light layers - high luminosity & deep crimson radiance */
   .bg-atmosphere-hero {
-    background: radial-gradient(circle at 75% 35%, rgba(120, 0, 0, 0.22) 0%, rgba(26, 0, 0, 0.12) 40%, transparent 70%);
+    background: radial-gradient(circle at 75% 35%, rgba(255, 20, 35, 0.45) 0%, rgba(180, 10, 20, 0.25) 40%, transparent 72%);
   }
 
   .bg-atmosphere-about {
-    background: radial-gradient(circle at 20% 50%, rgba(80, 0, 0, 0.18) 0%, rgba(20, 0, 0, 0.08) 50%, transparent 75%);
+    background: radial-gradient(circle at 25% 50%, rgba(255, 25, 40, 0.42) 0%, rgba(180, 10, 20, 0.22) 50%, transparent 75%),
+                radial-gradient(circle at 80% 60%, rgba(255, 40, 60, 0.28) 0%, transparent 60%);
   }
 
   .bg-atmosphere-skills {
-    background: radial-gradient(circle at 50% 40%, rgba(120, 0, 0, 0.14) 0%, rgba(26, 0, 0, 0.06) 45%, transparent 70%);
+    background: radial-gradient(circle at 50% 35%, rgba(255, 25, 40, 0.40) 0%, rgba(180, 10, 20, 0.20) 45%, transparent 72%),
+                radial-gradient(circle at 15% 80%, rgba(255, 40, 60, 0.28) 0%, transparent 60%);
   }
 
   .bg-atmosphere-projects {
-    background: radial-gradient(circle at 80% 25%, rgba(140, 0, 0, 0.16) 0%, rgba(30, 0, 0, 0.08) 40%, transparent 70%);
+    background: radial-gradient(circle at 80% 25%, rgba(255, 30, 45, 0.45) 0%, rgba(180, 10, 20, 0.25) 42%, transparent 72%),
+                radial-gradient(circle at 20% 75%, rgba(255, 20, 35, 0.35) 0%, transparent 65%);
   }
 
   .bg-atmosphere-journey {
-    background: radial-gradient(circle at 50% 50%, rgba(100, 0, 0, 0.12) 0%, rgba(20, 0, 0, 0.05) 50%, transparent 75%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 25, 40, 0.38) 0%, rgba(180, 10, 20, 0.20) 50%, transparent 75%),
+                radial-gradient(circle at 80% 85%, rgba(255, 40, 60, 0.28) 0%, transparent 60%);
   }
 
   .bg-atmosphere-contact {
-    background: radial-gradient(circle at 25% 65%, rgba(140, 0, 0, 0.2) 0%, rgba(30, 0, 0, 0.1) 45%, transparent 75%);
+    background: radial-gradient(circle at 25% 65%, rgba(255, 30, 45, 0.50) 0%, rgba(180, 10, 20, 0.28) 45%, transparent 75%),
+                radial-gradient(circle at 85% 30%, rgba(255, 25, 40, 0.35) 0%, transparent 65%);
   }
 }

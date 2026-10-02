@@ -59,31 +59,30 @@ export const Hero = () => {
   }, []);
   return <div id="hero" className="blueprint-hero" ref={root}>
     <div className="hero-room" aria-hidden="true">
-      <div className="hero-room-wall"><svg className="hero-wall-extension" viewBox="900 125 1476 65" preserveAspectRatio="none"><image href={visual} width="2376" height="958"/></svg></div>
-      <div className="hero-room-floor"/><div className="hero-room-halo"/>
-      <div className="hero-light-sweep"/>
+      <img
+        className="hero-main-bg"
+        src={visual}
+        alt="Abdullah Azaam - Full-Stack Developer at developer workstation"
+        fetchPriority="high"
+        decoding="async"
+      />
+      <div className="hero-bg-overlay" />
+      <div className="hero-light-sweep" />
       <div className="hero-room-dust">{Array.from({length:10},(_,i)=><i key={i} style={{left:(36+i*6.1)+'%',top:(14+(i*17)%73)+'%',animationDelay:(-i*2.3)+'s'}}/>)}</div>
     </div>
-    <div className="hero-workstation">
-      <div className="hero-approved-plane">
-        <img className="hero-approved-base" src={visual} alt="Abdullah Azaam - Full-Stack Developer at developer workstation" width="2376" height="958" fetchPriority="high" decoding="async" />
-        <img className="hero-monitor-depth" src={visual} alt="" aria-hidden="true" width="2376" height="958" />
-        <img className="hero-monitor-depth hero-monitor-depth-right" src={visual} alt="" aria-hidden="true" width="2376" height="958" />
-        <img className="hero-desk-depth" src={visual} alt="" aria-hidden="true" width="2376" height="958" />
-      </div>
-    </div>
     <div className="hero-room-copy">
+      <div className="hero-copy-backdrop" aria-hidden="true" />
       <p className="hero-room-eyebrow">FULL-STACK DEVELOPER</p>
       <h1><span>Abdullah </span><span>Azaam</span></h1>
       <p className="hero-room-description">Building scalable web applications and immersive digital experiences.</p>
       <div className="hero-room-actions">
-        <a href="#projects" aria-label="View My Work" title="View My Work">View My Work <ArrowRight size={15}/></a>
-        <a href="https://github.com/abdullahazaam" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile"><GithubIcon size={15}/> GitHub</a>
+        <a href="#projects" aria-label="View My Work" title="View My Work">View My Work <ArrowRight size={18}/></a>
+        <a href="https://github.com/abdullahazaam" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile"><GithubIcon size={18}/> GitHub</a>
       </div>
       <div className="hero-room-stats">
         <div><strong>5+</strong><span>Major Projects</span></div>
         <div><strong>15+</strong><span>Technologies</span></div>
-        <div><strong aria-hidden="true"><InfinityIcon size={29}/></strong><span>Always Learning</span></div>
+        <div><strong aria-hidden="true"><InfinityIcon size={34}/></strong><span>Always Learning</span></div>
       </div>
     </div>
   </div>;

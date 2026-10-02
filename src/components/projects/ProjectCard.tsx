@@ -130,7 +130,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
   };
 
   return (
-    <div style={{ perspective: '1100px' }} className="w-full">
+    <div style={{ perspective: '1100px' }} className="w-full h-full flex">
       <motion.div
         ref={cardRef}
         onClick={handleCardClick}
@@ -154,7 +154,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
             ? '0 28px 55px -14px rgba(0, 0, 0, 0.95), 0 0 34px rgba(229, 9, 20, 0.45), inset 0 1px 1.5px rgba(255, 255, 255, 0.16)'
             : '0 10px 30px rgba(0, 0, 0, 0.75), 0 0 18px rgba(229, 9, 20, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.05)',
         }}
-        className={`premium-card project-card ${prominent ? 'featured-card' : ''} group relative rounded-2xl bg-[#09080A]/95 border flex flex-col justify-between overflow-hidden cursor-pointer select-none ${
+        className={`premium-card project-card ${prominent ? 'featured-card' : ''} group relative rounded-2xl bg-[#09080A]/95 border flex flex-col justify-between overflow-hidden cursor-pointer select-none w-full h-full ${
           isHovered
             ? 'border-[#E50914]'
             : prominent
@@ -231,7 +231,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
           aria-hidden="true"
         />
 
-        <div className="relative z-10" style={{ transform: 'translateZ(10px)' }}>
+        <div className="relative z-10 flex flex-col flex-1" style={{ transform: 'translateZ(10px)' }}>
           {/* Screenshot / High-Tech Preview Window with Parallax Shift */}
           <div
             ref={previewRef}
@@ -300,7 +300,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
 
           {/* Tech Stack Pills with subtle glow */}
           <div
-            className="flex flex-wrap gap-1.5 mt-2 transition-transform duration-300"
+            className="flex flex-wrap gap-1.5 mt-2 min-h-[24px] items-center transition-transform duration-300"
             style={{ transform: isHovered ? 'translateZ(14px)' : 'translateZ(0)' }}
           >
             {project.tags.map((tag) => (
@@ -318,14 +318,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, promin
           </div>
 
           {/* Short Description */}
-          <p className="mt-2.5 font-sans text-xs text-neutral-300 leading-relaxed line-clamp-3">
+          <p className="mt-2.5 font-sans text-xs text-neutral-300 leading-relaxed line-clamp-3 flex-1">
             {project.shortDescription}
           </p>
         </div>
 
         {/* Footer: Elevated Action Buttons */}
         <div
-          className="mt-4 pt-3 border-t border-neutral-900/90 flex items-center gap-2 relative z-20"
+          className="mt-auto pt-3 border-t border-neutral-900/90 flex items-center gap-2 relative z-20"
           style={{ transform: isHovered ? 'translateZ(18px)' : 'translateZ(0)' }}
         >
           {project.liveUrl ? (
